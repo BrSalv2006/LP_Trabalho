@@ -1,26 +1,27 @@
+/**
+    @file main-team-8.c
+*/
+
+#include "functions-team-8.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "functions-team-8.h"
 
-int main(int argc, char *argv[])
-{
-    // Check Arguments
-    for (int i = 0; i < argc; i++)
-    {
-        if (strcmp(argv[i], "--help") == 0)
-        {
-            helpmenu(argv[i]);
-        }
-    }
+/// Check Arguments, Request Array and Open Menu
+int main(int argc, char *argv[]) {
+	// Declarar Array
+	int array[20];
 
-    // Pedir Array
-    int array[20];
-    request_array(array);
+	// Verificar Argumentos
+	for (int i = 0; i < argc; i++) {
+		if (strcmp(argv[i], "--help") == 0) {
+			helpmenu(argv[i]);
+		}
+	}
 
-    // Calcular quantos elementos o Array tem
-    int arraysize = sizeof(array) / sizeof(int);
+	// Pedir Array
+	request_array(array);
 
-    // Chamar o Menu
-    menu(array, arraysize);
+	// Abrir Menu
+	menu(array, 20);
 }

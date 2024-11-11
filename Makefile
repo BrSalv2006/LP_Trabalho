@@ -21,7 +21,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) -c $< -o $@
 
 $(BIN_DIR) $(OBJ_DIR):
-	mkdir $@
+	mkdir -p $@
 
 clean:
 	rm -rf $(BIN_DIR) $(OBJ_DIR)

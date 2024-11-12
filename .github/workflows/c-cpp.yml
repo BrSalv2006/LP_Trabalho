@@ -21,7 +21,7 @@ jobs:
       - name: Build Binaries
         run: make
       - name: Release the new binaries
-        uses: mini-bomba/create-github-release@v1.1.3
+        uses: mini-bomba/create-github-release@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: "latest"

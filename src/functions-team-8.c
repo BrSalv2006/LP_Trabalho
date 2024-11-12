@@ -13,6 +13,8 @@ int arraycopy[20];
 int matriz[20][20];
 /// Declarar Array de Floats
 float floatarray[10];
+/// Declarar um Segundo Array
+int mixed_array[20];
 
 /// Pedir, Verificar e Guardar vinte números inteiros entre 8 e 29
 int *request_array(int array[]) {
@@ -156,6 +158,32 @@ int random_element(int array[]) {
 	return arraycopy[integer];
 }
 
+/// Função Multiple of 3
+int *multipleof3(int array[]) {
+	resetarraycopy(array);
+	for (int i = 0; i * 3 + 2 < 20; i++) {
+		arraycopy[i] = arraycopy[i * 3 + 2];
+	}
+	return arraycopy;
+}
+
+/// Função Misturar Metade de Cada Array
+int *mixhalfarray(int array[]) {
+	int second_array[20];
+	resetarraycopy(array);
+	request_array(second_array);
+	// Copy the first half of vector1 into mixed_vector
+	for (int i = 0; i < 10; i++) {
+		mixed_array[i] = array[i];
+	}
+
+	// Copy the second half of vector2 into mixed_vector after vector1's half
+	for (int i = 0; i < 10; i++) {
+		mixed_array[10 + i] = second_array[10 + i];
+	}
+	return mixed_array;
+}
+
 /// Função Menu de Ajuda
 void helpmenu(char argv[]) {
 	printf("Argument = %s\n\n", argv);
@@ -164,7 +192,7 @@ void helpmenu(char argv[]) {
 /// Função Mostrar Menu e Escolher Sub-Menu
 void menu(int array[], int arraysize) {
 	int menuchoice, readResult;
-	srand(time(NULL));
+	srand(time(0));
 	print_array(array, "Vetor Original:", arraysize);
 	printf("Menu:\n");
 	printf("1 - Vetor ordenado por ordem crescente\n");
@@ -172,9 +200,10 @@ void menu(int array[], int arraysize) {
 	printf("3 - Matriz 20x20 com o vetor original e algumas das suas permutações\n");
 	printf("4 - Cosseno da segunda metade dos elementos no vetor\n");
 	printf("5 - Elemento aleatório do vetor\n");
-	printf("6 - \n");
+	printf("6 - Posições Múltiplas de 3\n");
 	printf("7 - Menu de Ajuda\n");
 	printf("8 - Sair\n");
+	printf("9 - Misturar Metade de Cada Vetor\n");
 	readResult = scanf("%d", &menuchoice);
 	system("clear");
 	if (readResult == 1) {
@@ -195,12 +224,16 @@ void menu(int array[], int arraysize) {
 			print_int(random_element(array), "Elemento aleatório do vetor:");
 			menu(array, arraysize);
 		case 6:
-
+			print_array(multipleof3(array), "Posições Múltiplas de 3", arraysize / 3);
+			menu(array, arraysize);
 		case 7:
 			helpmenu("--help");
 			menu(array, arraysize);
 		case 8:
 			exit(0);
+		case 9:
+			print_array(mixhalfarray(array), "Misturar Metade de Cada Vetor:", arraysize);
+			menu(array, arraysize);
 		default:
 			menu(array, arraysize);
 		}

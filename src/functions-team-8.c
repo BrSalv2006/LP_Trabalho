@@ -172,12 +172,9 @@ int *mixhalfarray(int array[]) {
 	int second_array[20];
 	resetarraycopy(array);
 	request_array(second_array);
-	// Copy the first half of vector1 into mixed_vector
 	for (int i = 0; i < 10; i++) {
 		mixed_array[i] = array[i];
 	}
-
-	// Copy the second half of vector2 into mixed_vector after vector1's half
 	for (int i = 0; i < 10; i++) {
 		mixed_array[10 + i] = second_array[10 + i];
 	}

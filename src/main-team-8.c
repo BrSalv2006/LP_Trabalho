@@ -15,7 +15,9 @@ int main(int argc, char *argv[]) {
 	// Verificar Argumentos
 	for (int i = 0; i < argc; i++) {
 		if (strcmp(argv[i], "--help") == 0) {
-			helpmenu(argv[i]);
+			helpmenu();
+			printf("Pressione Qualquer Tecla para fechar a Ajuda");
+			getchar();
 		}
 	}
 

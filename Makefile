@@ -10,7 +10,7 @@ EXE = $(BIN_DIR)/$(BIN_FILENAME)
 CC = cc
 LDLIBS = -lm
 
-.PHONY: all clean run
+.PHONY: all clean run help
 
 all: $(EXE)
 
@@ -28,3 +28,6 @@ clean:
 
 run: $(EXE)
 	$(EXE)
+
+help: $(EXE)
+	$(EXE) --help

@@ -8,14 +8,14 @@ OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 EXE = $(BIN_DIR)/$(BIN_FILENAME)
 
 CC = cc
-LDLIBS = -lm
+ARGS = -lm
 
 .PHONY: all clean run help
 
 all: $(EXE)
 
 $(EXE): $(OBJ) | $(BIN_DIR)
-	$(CC) $^ $(LDLIBS) -o $@
+	$(CC) $^ $(ARGS) -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) -c $< -o $@

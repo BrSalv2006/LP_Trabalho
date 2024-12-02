@@ -212,7 +212,7 @@ int (*twoarrayscalcmatrix(int array[], int matriz[20][20]))[20] {
 	resetarraycopy(array);
 
 	for (int i = 0; i < 20; i++) {
-		second_array[i] = (rand() % 21) + 8;
+		second_array[i] = (rand() % 29) + 8;
 	}
 
 	for (int i = 0; i < 20; i++) {

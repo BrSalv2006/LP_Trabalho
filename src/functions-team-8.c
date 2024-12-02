@@ -7,8 +7,8 @@
 #include <stdlib.h>
 
 /// Define Arrays and Matrices
-int *ArrayCopy, *HalfArray, *PositionsMultipleof3Array, **Matrix;
-float *HalfFloatArray;
+int *IntegerArray, **Matrix, **TransposedMatrix;
+float *FloatArray;
 
 /// Clear Terminal
 void ClearTerminal() {
@@ -59,7 +59,7 @@ int *RequestArray(int *Array, int ArraySize, int Minimum, int Maximum) {
 				Array[i] = Number;
 				i++;
 			} else {
-				printf("O número deve estar compreendido entre 8 e 29.\n");
+				printf("O número deve estar compreendido entre %d e %d.\n", Minimum, Maximum);
 			}
 		} else {
 			ClearInput();
@@ -69,60 +69,42 @@ int *RequestArray(int *Array, int ArraySize, int Minimum, int Maximum) {
 	return Array;
 }
 
-/// Allocate and Fill Array Copy
-int *AllocateFillArrayCopy(int *Array, int ArraySize) {
-	ArrayCopy = (int *)malloc(ArraySize * sizeof(int));
-	for (int i = 0; i < 20; i++) {
-		ArrayCopy[i] = Array[i];
+/// Copy Integer Array
+void CopyArray(int *Array, int *ArrayToFill, int ArraySize) {
+	for (int i = 0; i < ArraySize; i++) {
+		ArrayToFill[i] = Array[i];
 	}
-	return ArrayCopy;
 }
 
-/// Allocate Half Array
-int *AllocateHalfArray(int ArraySize) {
-	HalfArray = (int *)malloc(ArraySize / 2 * sizeof(int));
-	return HalfArray;
+/// Allocate Integer Array
+int *AllocateIntegerArray(int ArraySize) {
+	IntegerArray = (int *)calloc(ArraySize, sizeof(int));
+	return IntegerArray;
 }
 
-/// Allocate Positions Multiple of 3 Array
-int *AllocatePositionsMultipleof3Array(int ArraySize) {
-	PositionsMultipleof3Array = (int *)malloc(ArraySize / 3 * sizeof(int));
-	return PositionsMultipleof3Array;
-}
-
-/// Allocate Half Float Array
-float *AllocateHalfFloatArray(int ArraySize) {
-	HalfFloatArray = (float *)malloc(ArraySize / 2 * sizeof(float));
-	return HalfFloatArray;
+/// Allocate Float Array
+float *AllocateFloatArray(int ArraySize) {
+	FloatArray = (float *)calloc(ArraySize, sizeof(float));
+	return FloatArray;
 }
 
 /// Allocate Matrix
-int **AllocateMatrix(int ArraySize) {
-	Matrix = (int **)malloc(ArraySize * sizeof(int *));
+int **AllocateMatrix(int **Matrix, int ArraySize) {
+	Matrix = (int **)calloc(ArraySize, sizeof(int *));
 	for (int i = 0; i < ArraySize; i++) {
-		Matrix[i] = (int *)malloc(ArraySize * sizeof(int));
+		Matrix[i] = (int *)calloc(ArraySize, sizeof(int));
 	}
 	return Matrix;
 }
 
-/// Dispose Array Copy
-void DisposeArrayCopy() {
-	free(ArrayCopy);
+/// Dispose Integer Array
+void DisposeIntegerArray() {
+	free(IntegerArray);
 }
 
-/// Dispose Half Array
-void DisposeHalfArray() {
-	free(HalfArray);
-}
-
-/// Dispose Half Array
-void DisposeHalfFloatArray() {
-	free(HalfFloatArray);
-}
-
-/// Dispose Positions Multiple of 3 Array
-void DisposePositionsMultipleof3Array() {
-	free(PositionsMultipleof3Array);
+/// Dispose Float Array
+void DisposeFloatArray() {
+	free(FloatArray);
 }
 
 /// Dispose Matrix
@@ -131,6 +113,7 @@ void DisposeMatrix(int ArraySize) {
 		free(Matrix[i]);
 	}
 	free(Matrix);
+	Matrix = NULL;
 }
 
 /// Print Integer
@@ -170,29 +153,30 @@ void PrintIntegerMatrix(int **Matrix, char *Text, int MatrixSize) {
 
 /// Sort Array in Ascending Order
 int *SortAscendingOrder(int *Array, int ArraySize) {
-	ArrayCopy = AllocateFillArrayCopy(Array, ArraySize);
+	IntegerArray = AllocateIntegerArray(ArraySize);
+	CopyArray(Array, IntegerArray, ArraySize);
 	int k;
 	do {
 		k = 0;
 		for (int i = 0; i < ArraySize - 1; i++) {
-			if (ArrayCopy[i] > ArrayCopy[i + 1]) {
-				int Temp = ArrayCopy[i];
-				ArrayCopy[i] = ArrayCopy[i + 1];
-				ArrayCopy[i + 1] = Temp;
+			if (IntegerArray[i] > IntegerArray[i + 1]) {
+				int Temp = IntegerArray[i];
+				IntegerArray[i] = IntegerArray[i + 1];
+				IntegerArray[i + 1] = Temp;
 				k++;
 			}
 		}
 	} while (k != 0);
-	return ArrayCopy;
+	return IntegerArray;
 }
 
 /// Add First and Second Half of the Array
 int *AddFirstSecondHalf(int *Array, int ArraySize) {
-	HalfArray = AllocateHalfArray(ArraySize);
+	IntegerArray = AllocateIntegerArray(ArraySize / 2);
 	for (int i = 0; i < ArraySize / 2; i++) {
-		HalfArray[i] = Array[i] + Array[i + ArraySize / 2];
+		IntegerArray[i] = Array[i] + Array[i + ArraySize / 2];
 	}
-	return HalfArray;
+	return IntegerArray;
 }
 
 /// Shuffle Array
@@ -208,12 +192,13 @@ int *ShuffleArray(int *Array, int ArraySize) {
 
 /// Generate Permuted Matrix
 int **GeneratePermutedMatrix(int *Array, int ArraySize) {
-	Matrix = AllocateMatrix(ArraySize);
-	for (int j = 0; j < 20; j++) {
+	Matrix = AllocateMatrix(Matrix, ArraySize);
+	for (int j = 0; j < ArraySize; j++) {
 		Matrix[0][j] = Array[j];
 	}
-	for (int i = 1; i < 20; i++) {
-		for (int j = 0; j < 20; j++) {
+	for (int i = 1; i < ArraySize; i++) {
+		CopyArray(Array, Matrix[i], ArraySize);
+		for (int j = 0; j < ArraySize; j++) {
 			Matrix[i][j] = Array[j];
 		}
 		ShuffleArray(Matrix[i], ArraySize);
@@ -223,93 +208,79 @@ int **GeneratePermutedMatrix(int *Array, int ArraySize) {
 
 /// Cosine of the Second Half of the Array
 float *CosineSecondHalf(int *Array, int ArraySize) {
-	HalfFloatArray = AllocateHalfFloatArray(ArraySize);
-	for (int i = 10; i < 20; i++) {
-		HalfFloatArray[i - 10] = cos(Array[i]);
+	FloatArray = AllocateFloatArray(ArraySize / 2);
+	for (int i = ArraySize / 2; i < ArraySize; i++) {
+		FloatArray[i - (ArraySize / 2)] = cos(Array[i]);
 	}
-	return HalfFloatArray;
+	return FloatArray;
 }
 
 /// Random Element of the Array
 int RandomElement(int *Array, int ArraySize) {
-	int i = rand() % 20;
+	int i = rand() % ArraySize;
 	return Array[i];
 }
 
 /// Positions Multiple of 3 of the Array
 int *PositionsMultipleof3(int *Array, int ArraySize) {
-	PositionsMultipleof3Array = AllocatePositionsMultipleof3Array(ArraySize);
+	IntegerArray = AllocateIntegerArray(ArraySize / 3);
 	for (int i = 0; i * 3 + 2 < ArraySize; i++) {
-		PositionsMultipleof3Array[i] = Array[i * 3 + 2];
+		IntegerArray[i] = Array[i * 3 + 2];
 	}
-	return PositionsMultipleof3Array;
+	return IntegerArray;
 }
 
-///// Função Misturar Metade de Cada Array
-//int *mixhalfarray(int *Array, int ArraySize) {
-//	int *ArrayCopy = AllocateFillArrayCopy(Array, ArraySize);
-//	RequestArray(second_array, 20, 8, 29);
-//	for (int i = 0; i < 10; i++) {
-//		mixed_array[i] = ArrayCopy[i];
-//	}
-//	for (int i = 0; i < 10; i++) {
-//		mixed_array[10 + i] = second_array[10 + i];
-//	}
-//	return mixed_array;
-//}
-//
-///// Função mínimo múltiplo comum de cada dois números seguidos do vetor;
-//int *leastcommummultiple(int *Array, int ArraySize) {
-//	int max, adder;
-//	int *ArrayCopy = AllocateFillArrayCopy(Array, ArraySize);
-//
-//	for (int i = 0; i < 19; i++) {
-//		if (ArrayCopy[i] > ArrayCopy[i + 1]) {
-//			max = ArrayCopy[i + 1];
-//			adder = ArrayCopy[i + 1];
-//		} else {
-//			max = ArrayCopy[i];
-//			adder = ArrayCopy[i];
-//		}
-//
-//		while (max <= ArrayCopy[i] * ArrayCopy[i + 1]) {
-//			if (max % ArrayCopy[i] == 0 && max % ArrayCopy[i + 1] == 0) {
-//				ArrayCopy[i] = max;
-//				break;
-//			}
-//			max += adder;
-//		}
-//	}
-//	return ArrayCopy;
-//}
-//
-///// Função Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original
-//int (*twoarrayscalcmatrix(int *Array, int ArraySize, int matriz[20][20]))[20] {
-//	int n;
-//	int *ArrayCopy = AllocateFillArrayCopy(Array, ArraySize);
-//
-//	for (int i = 0; i < 20; i++) {
-//		second_array[i] = (rand() % 29) + 8;
-//	}
-//
-//	for (int i = 0; i < 20; i++) {
-//		for (int j = 0; j < 20; j++) {
-//			matriz[i][j] = second_array[i] * ArrayCopy[j];
-//		}
-//	}
-//	return matriz;
-//}
-//
-///// Função Matriz Transposta
-//int (*transposematrix(int matriz[][20]))[20] {
-//	int tmp;
-//
-//	for (int i = 0; i < 20; i++) {
-//		for (int j = 0; j < 20; j++) {
-//			tmp = matriz[i][j];
-//			matriz[i][j] = matriz[j][i];
-//			matriz[j][i] = tmp;
-//		}
-//	}
-//	return matriz;
-//}
+/// Mix Half of Each Array
+int *MixHalfEachArray(int *Array, int ArraySize, int Minimum, int Maximum) {
+	IntegerArray = AllocateIntegerArray(ArraySize);
+	RequestArray(IntegerArray, ArraySize, Minimum, Maximum);
+	for (int i = 0; i < ArraySize / 2; i++) {
+		IntegerArray[i] = Array[i];
+	}
+	return IntegerArray;
+}
+
+/// Least Common Multiple;
+int *LeastCommonMultiple(int *Array, int ArraySize) {
+	IntegerArray = AllocateIntegerArray(ArraySize - 1);
+	int Temp;
+	for (int i = 0; i < ArraySize - 1; i++) {
+		Temp = Array[i];
+		while (Temp <= Array[i] * Array[i + 1]) {
+			if (Temp % Array[i] == 0 && Temp % Array[i + 1] == 0) {
+				IntegerArray[i] = Temp;
+				break;
+			}
+			Temp += Array[i];
+		}
+	}
+	return IntegerArray;
+}
+
+// Product Between Original Array and Random Array
+int **ProductBetweenTwoArrays(int *Array, int ArraySize, int Minimum, int Maximum) {
+	IntegerArray = AllocateIntegerArray(ArraySize);
+	Matrix = AllocateMatrix(Matrix, ArraySize);
+	for (int i = 0; i < ArraySize; i++) {
+		IntegerArray[i] = rand() % (Maximum + 1 - Minimum) + Minimum;
+	}
+	for (int i = 0; i < ArraySize; i++) {
+		for (int j = 0; j < ArraySize; j++) {
+			Matrix[i][j] = IntegerArray[i] * Array[j];
+		}
+	}
+	return Matrix;
+}
+
+/// Transpose Matrix of Product Between Original Array and Random Array
+int **TransposeMatrix(int **Matrix, int ArraySize) {
+	TransposedMatrix = AllocateMatrix(TransposedMatrix, ArraySize);
+	for (int i = 0; i < ArraySize; i++) {
+		for (int j = 0; j < ArraySize; j++) {
+			int Temp = Matrix[i][j];
+			TransposedMatrix[i][j] = Matrix[j][i];
+			TransposedMatrix[j][i] = Temp;
+		}
+	}
+	return TransposedMatrix;
+}

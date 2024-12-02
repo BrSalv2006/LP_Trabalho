@@ -6,240 +6,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/// Definir Cópia do Array Original
-int arraycopy[20];
-/// Declarar Matriz 20x20
-int matriz[20][20];
-/// Declarar Array de Floats
-float floatarray[10];
-/// Declarar um Segundo Array
-int second_array[20];
-/// Declarar um Outro Array
-int mixed_array[20];
+/// Define Arrays and Matrices
+int *ArrayCopy, *HalfArray, *PositionsMultipleof3Array, **Matrix;
+float *HalfFloatArray;
 
-/// Pedir, Verificar e Guardar vinte números inteiros entre 8 e 29
-int *request_array(int array[]) {
-	int k, readResult;
+/// Clear Terminal
+void ClearTerminal() {
 	system("clear");
-	for (int i = 0; i < 20;) {
-		printf("\rInsira um número inteiro entre 8 e 29: ");
-		readResult = scanf("%d", &k);
-		system("clear");
-		if (readResult == 1) {
-			if (k >= 8 && k <= 29) {
-				array[i] = k;
-				i++;
-			} else {
-				printf("O número deve estar compreendido entre 8 e 29.\n");
-			}
-		} else {
-			clearerr(stdin);
-			scanf("%*s");
-			printf("Input Inválido\n");
-		}
-	}
 	printf("\e[1;1H\e[2J");
-	return array;
 }
 
-/// Função Print Integer
-void print_int(int integer, char print_text[]) {
-	printf("%s\n", print_text);
-	printf(" %d", integer);
-	printf("\n\n");
+/// Clear Input
+void ClearInput() {
+	fflush(stdin);
+	scanf("%*s");
+	printf("Input Inválido\n\n");
 }
 
-/// Função Print Integer Array
-void print_array(int array[], char print_text[], int arraysize) {
-	printf("%s\n", print_text);
-	for (int a = 0; a < arraysize; a++) {
-		printf(" %d", array[a]);
-	}
-	printf("\n\n");
-}
-
-/// Função Print Float Array
-void print_float_array(float array[], char print_text[], int arraysize) {
-	printf("%s\n", print_text);
-	for (int a = 0; a < arraysize; a++) {
-		printf(" %f", array[a]);
-	}
-	printf("\n\n");
-}
-
-/// Função Print Matrix
-void print_matrix(int matrix[20][20], char print_text[]) {
-	printf("%s\n", print_text);
-	for (int i = 0; i < 20; i++) {
-		for (int j = 0; j < 20; j++) {
-			printf(" %3d", matrix[i][j]);
-		}
-		printf("\n");
-	}
-	printf("\n");
-}
-
-/// Função Reiniciar Cópia do Array
-void resetarraycopy(int array[]) {
-	for (int a = 0; a < 20; a++) {
-		arraycopy[a] = array[a];
-	}
-}
-
-/// Função Ordenar Array por Ordem Crescente
-int *sort_by_ascending_order(int array[]) {
-	resetarraycopy(array);
-	int i, k, tmp;
-	do {
-		k = 0;
-		i = 0;
-		while (i < 19) {
-			if (arraycopy[i] > arraycopy[i + 1]) {
-				tmp = arraycopy[i];
-				arraycopy[i] = arraycopy[i + 1];
-				arraycopy[i + 1] = tmp;
-				i++;
-				k++;
-			} else {
-				i++;
-			}
-		}
-	} while (k != 0);
-	return arraycopy;
-}
-
-/// Função Soma a Primeira Metade dos Elementos do Array com a Segunda Metade
-int *addfs(int array[]) {
-	resetarraycopy(array);
-	for (int a = 0; a < 10; a++) {
-		arraycopy[a] = arraycopy[a] + arraycopy[a + 10];
-	}
-	return arraycopy;
-}
-
-/// Função Shuffle Array
-int *shuffle_array(int matrix_array[]) {
-	for (int i = 19; i > 0; i--) {
-		int j = rand() % 20;
-		int temp = matrix_array[j];
-		matrix_array[j] = matrix_array[i];
-		matrix_array[i] = temp;
-	}
-	return matrix_array;
-}
-
-/// Função para gerar uma matriz 20x20 com o vetor original e suas permutações
-int (*generate_permuted_matrix(int array[], int matriz[20][20]))[20] {
-	resetarraycopy(array);
-	for (int j = 0; j < 20; j++) {
-		matriz[0][j] = arraycopy[j];
-	}
-	for (int i = 1; i < 20; i++) {
-		for (int j = 0; j < 20; j++) {
-			matriz[i][j] = arraycopy[j];
-		}
-		shuffle_array(matriz[i]);
-	}
-	return matriz;
-}
-
-/// Função Coseno da Segunda Metade do Array
-float *cosine_second_half(int array[]) {
-	resetarraycopy(array);
-	for (int i = 10; i < 20; i++) {
-		floatarray[i - 10] = cos(arraycopy[i]);
-	}
-	return floatarray;
-}
-
-/// Função Random Element
-int random_element(int array[]) {
-	resetarraycopy(array);
-	int integer = rand() % 20;
-	return arraycopy[integer];
-}
-
-/// Função Multiple of 3
-int *multipleof3(int array[]) {
-	resetarraycopy(array);
-	for (int i = 0; i * 3 + 2 < 20; i++) {
-		arraycopy[i] = arraycopy[i * 3 + 2];
-	}
-	return arraycopy;
-}
-
-/// Função Misturar Metade de Cada Array
-int *mixhalfarray(int array[]) {
-	resetarraycopy(array);
-	request_array(second_array);
-	for (int i = 0; i < 10; i++) {
-		mixed_array[i] = arraycopy[i];
-	}
-	for (int i = 0; i < 10; i++) {
-		mixed_array[10 + i] = second_array[10 + i];
-	}
-	return mixed_array;
-}
-
-/// Função mínimo múltiplo comum de cada dois números seguidos do vetor;
-int *leastcommummultiple(int array[]) {
-	int max, adder;
-	resetarraycopy(array);
-
-	for (int i = 0; i < 19; i++) {
-		if (arraycopy[i] > arraycopy[i + 1]) {
-			max = arraycopy[i + 1];
-			adder = arraycopy[i + 1];
-		} else {
-			max = arraycopy[i];
-			adder = arraycopy[i];
-		}
-
-		while (max <= arraycopy[i] * arraycopy[i + 1]) {
-			if (max % arraycopy[i] == 0 && max % arraycopy[i + 1] == 0) {
-				arraycopy[i] = max;
-				break;
-			}
-			max += adder;
-		}
-	}
-	return arraycopy;
-}
-
-/// Função Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original
-int (*twoarrayscalcmatrix(int array[], int matriz[20][20]))[20] {
-	int n;
-	resetarraycopy(array);
-
-	for (int i = 0; i < 20; i++) {
-		second_array[i] = (rand() % 29) + 8;
-	}
-
-	for (int i = 0; i < 20; i++) {
-		for (int j = 0; j < 20; j++) {
-			matriz[i][j] = second_array[i] * array[j];
-		}
-	}
-	return matriz;
-}
-
-/// Função Matriz Transposta
-int (*transposematrix(int matriz[][20]))[20] {
-	int tmp;
-
-	for (int i = 0; i < 20; i++) {
-		for (int j = 0; j < 20; j++) {
-			tmp = matriz[i][j];
-			matriz[i][j] = matriz[j][i];
-			matriz[j][i] = tmp;
-		}
-	}
-	return matriz;
-}
-
-/// Função Menu de Ajuda
-void helpmenu() {
-	system("clear");
+/// Help
+void Help() {
+	ClearTerminal();
 	printf("O objetivo deste trabalho  é  implementar  um programa que peça ao utilizador 20 números inteiros e os guarde num vetor, para posteriormente providenciar forma de calcular algumas estatísticas ou fazer operações sobre esses valores.\n");
 	printf("Os valores pedidos devem estar compreendidos entre 8 e 29.\n");
 	printf("Deve ser feita a VALIDAÇÃO DE ENTRADA!\n\n");
@@ -260,71 +46,270 @@ void helpmenu() {
 	printf(" 6 - O programa mostra alguma ajuda quando é executado a partir da linha de comandos com a flag --help.\n\n");
 }
 
-/// Função Mostrar Menu e Escolher Sub-Menu
-void menu(int array[], int arraysize) {
-	int menuchoice, readResult;
-	print_array(array, "Vetor Original:", arraysize);
-	printf("Menu:\n");
-	printf("1  - Vetor ordenado por ordem crescente\n");
-	printf("2  - Soma da primeira metade dos elementos no vetor com os da segunda metade\n");
-	printf("3  - Matriz 20x20 com o vetor original e algumas das suas permutações\n");
-	printf("4  - Cosseno da segunda metade dos elementos no vetor\n");
-	printf("5  - Elemento aleatório do vetor\n");
-	printf("6  - Posições Múltiplas de 3\n");
-	printf("7  - Menu de Ajuda\n");
-	printf("8  - Sair\n");
-	printf("9  - Misturar Metade de Cada Vetor\n");
-	printf("10 - Mínimo múltiplo comum de cada dois números seguidos do vetor\n");
-	printf("11 - Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original\n");
-	printf("12 - Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original Transposta\n");
-
-	readResult = scanf("%d", &menuchoice);
-	system("clear");
-	if (readResult == 1) {
-		switch (menuchoice) {
-		case 1:
-			print_array(sort_by_ascending_order(array), "Vetor ordenado por ordem crescente:", arraysize);
-			menu(array, arraysize);
-		case 2:
-			print_array(addfs(array), "Soma da primeira metade dos elementos no vetor com os da segunda metade:", arraysize / 2);
-			menu(array, arraysize);
-		case 3:
-			print_matrix(generate_permuted_matrix(array, matriz), "Matriz 20x20 com o vetor original e algumas das suas permutações:");
-			menu(array, arraysize);
-		case 4:
-			print_float_array(cosine_second_half(array), "Cosseno da segunda metade dos elementos no vetor:", arraysize / 2);
-			menu(array, arraysize);
-		case 5:
-			print_int(random_element(array), "Elemento aleatório do vetor:");
-			menu(array, arraysize);
-		case 6:
-			print_array(multipleof3(array), "Posições múltiplas de 3:", arraysize / 3);
-			menu(array, arraysize);
-		case 7:
-			helpmenu();
-			menu(array, arraysize);
-		case 8:
-			exit(0);
-		case 9:
-			print_array(mixhalfarray(array), "Misturar metade de cada vetor:", arraysize);
-			menu(array, arraysize);
-		case 10:
-			print_array(leastcommummultiple(array), "Mínimo múltiplo comum de cada dois números seguidos do vetor:", arraysize - 1);
-			menu(array, arraysize);
-		case 11:
-			print_matrix(twoarrayscalcmatrix(array, matriz), "Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original:");
-			print_array(second_array, "Vetor Aleatório:", 20);
-			menu(array, arraysize);
-		case 12:
-			print_matrix(transposematrix(twoarrayscalcmatrix(array, matriz)), "Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original Transposta:");
-			print_array(second_array, "Vetor Aleatório:", 20);
-			menu(array, arraysize);
-		default:
-			menu(array, arraysize);
+/// Request, Verify and Store Integers between two numbers in an Array
+int *RequestArray(int *Array, int ArraySize, int Minimum, int Maximum) {
+	int Number, ValidNumber;
+	ClearTerminal();
+	for (int i = 0; i < ArraySize;) {
+		printf("Insira um número inteiro entre %d e %d: ", Minimum, Maximum);
+		ValidNumber = scanf("%d", &Number);
+		ClearTerminal();
+		if (ValidNumber == 1) {
+			if (Number >= Minimum && Number <= Maximum) {
+				Array[i] = Number;
+				i++;
+			} else {
+				printf("O número deve estar compreendido entre 8 e 29.\n");
+			}
+		} else {
+			ClearInput();
 		}
-	} else {
-		clearerr(stdin);
-		scanf("%*s");
-		menu(array, arraysize);
 	}
+	ClearTerminal();
+	return Array;
 }
+
+/// Allocate and Fill Array Copy
+int *AllocateFillArrayCopy(int *Array, int ArraySize) {
+	ArrayCopy = (int *)malloc(ArraySize * sizeof(int));
+	for (int i = 0; i < 20; i++) {
+		ArrayCopy[i] = Array[i];
+	}
+	return ArrayCopy;
+}
+
+/// Allocate Half Array
+int *AllocateHalfArray(int ArraySize) {
+	HalfArray = (int *)malloc(ArraySize / 2 * sizeof(int));
+	return HalfArray;
+}
+
+/// Allocate Positions Multiple of 3 Array
+int *AllocatePositionsMultipleof3Array(int ArraySize) {
+	PositionsMultipleof3Array = (int *)malloc(ArraySize / 3 * sizeof(int));
+	return PositionsMultipleof3Array;
+}
+
+/// Allocate Half Float Array
+float *AllocateHalfFloatArray(int ArraySize) {
+	HalfFloatArray = (float *)malloc(ArraySize / 2 * sizeof(float));
+	return HalfFloatArray;
+}
+
+/// Allocate Matrix
+int **AllocateMatrix(int ArraySize) {
+	Matrix = (int **)malloc(ArraySize * sizeof(int *));
+	for (int i = 0; i < ArraySize; i++) {
+		Matrix[i] = (int *)malloc(ArraySize * sizeof(int));
+	}
+	return Matrix;
+}
+
+/// Dispose Array Copy
+void DisposeArrayCopy() {
+	free(ArrayCopy);
+}
+
+/// Dispose Half Array
+void DisposeHalfArray() {
+	free(HalfArray);
+}
+
+/// Dispose Half Array
+void DisposeHalfFloatArray() {
+	free(HalfFloatArray);
+}
+
+/// Dispose Positions Multiple of 3 Array
+void DisposePositionsMultipleof3Array() {
+	free(PositionsMultipleof3Array);
+}
+
+/// Dispose Matrix
+void DisposeMatrix(int ArraySize) {
+	for (int i = 0; i < ArraySize; i++) {
+		free(Matrix[i]);
+	}
+	free(Matrix);
+}
+
+/// Print Integer
+void PrintInteger(int Integer, char *Text) {
+	printf("%s\n %d\n\n", Text, Integer);
+}
+
+/// Print Array of Integers
+void PrintIntegerArray(int *Array, char *Text, int ArraySize) {
+	printf("%s\n", Text);
+	for (int i = 0; i < ArraySize; i++) {
+		printf(" %d", Array[i]);
+	}
+	printf("\n\n");
+}
+
+/// Print Array of Floats
+void PrintFloatArray(float *Array, char *Text, int ArraySize) {
+	printf("%s\n", Text);
+	for (int i = 0; i < ArraySize; i++) {
+		printf(" %f", Array[i]);
+	}
+	printf("\n\n");
+}
+
+/// Print Matrix of Integers
+void PrintIntegerMatrix(int **Matrix, char *Text, int MatrixSize) {
+	printf("%s\n", Text);
+	for (int i = 0; i < MatrixSize; i++) {
+		for (int j = 0; j < MatrixSize; j++) {
+			printf(" %3d", Matrix[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
+/// Sort Array in Ascending Order
+int *SortAscendingOrder(int *Array, int ArraySize) {
+	ArrayCopy = AllocateFillArrayCopy(Array, ArraySize);
+	int k;
+	do {
+		k = 0;
+		for (int i = 0; i < ArraySize - 1; i++) {
+			if (ArrayCopy[i] > ArrayCopy[i + 1]) {
+				int Temp = ArrayCopy[i];
+				ArrayCopy[i] = ArrayCopy[i + 1];
+				ArrayCopy[i + 1] = Temp;
+				k++;
+			}
+		}
+	} while (k != 0);
+	return ArrayCopy;
+}
+
+/// Add First and Second Half of the Array
+int *AddFirstSecondHalf(int *Array, int ArraySize) {
+	HalfArray = AllocateHalfArray(ArraySize);
+	for (int i = 0; i < ArraySize / 2; i++) {
+		HalfArray[i] = Array[i] + Array[i + ArraySize / 2];
+	}
+	return HalfArray;
+}
+
+/// Shuffle Array
+int *ShuffleArray(int *Array, int ArraySize) {
+	for (int i = ArraySize - 1; i > 0; i--) {
+		int j = rand() % ArraySize;
+		int Temp = Array[j];
+		Array[j] = Array[i];
+		Array[i] = Temp;
+	}
+	return Array;
+}
+
+/// Generate Permuted Matrix
+int **GeneratePermutedMatrix(int *Array, int ArraySize) {
+	Matrix = AllocateMatrix(ArraySize);
+	for (int j = 0; j < 20; j++) {
+		Matrix[0][j] = Array[j];
+	}
+	for (int i = 1; i < 20; i++) {
+		for (int j = 0; j < 20; j++) {
+			Matrix[i][j] = Array[j];
+		}
+		ShuffleArray(Matrix[i], ArraySize);
+	}
+	return Matrix;
+}
+
+/// Cosine of the Second Half of the Array
+float *CosineSecondHalf(int *Array, int ArraySize) {
+	HalfFloatArray = AllocateHalfFloatArray(ArraySize);
+	for (int i = 10; i < 20; i++) {
+		HalfFloatArray[i - 10] = cos(Array[i]);
+	}
+	return HalfFloatArray;
+}
+
+/// Random Element of the Array
+int RandomElement(int *Array, int ArraySize) {
+	int i = rand() % 20;
+	return Array[i];
+}
+
+/// Positions Multiple of 3 of the Array
+int *PositionsMultipleof3(int *Array, int ArraySize) {
+	PositionsMultipleof3Array = AllocatePositionsMultipleof3Array(ArraySize);
+	for (int i = 0; i * 3 + 2 < ArraySize; i++) {
+		PositionsMultipleof3Array[i] = Array[i * 3 + 2];
+	}
+	return PositionsMultipleof3Array;
+}
+
+///// Função Misturar Metade de Cada Array
+//int *mixhalfarray(int *Array, int ArraySize) {
+//	int *ArrayCopy = AllocateFillArrayCopy(Array, ArraySize);
+//	RequestArray(second_array, 20, 8, 29);
+//	for (int i = 0; i < 10; i++) {
+//		mixed_array[i] = ArrayCopy[i];
+//	}
+//	for (int i = 0; i < 10; i++) {
+//		mixed_array[10 + i] = second_array[10 + i];
+//	}
+//	return mixed_array;
+//}
+//
+///// Função mínimo múltiplo comum de cada dois números seguidos do vetor;
+//int *leastcommummultiple(int *Array, int ArraySize) {
+//	int max, adder;
+//	int *ArrayCopy = AllocateFillArrayCopy(Array, ArraySize);
+//
+//	for (int i = 0; i < 19; i++) {
+//		if (ArrayCopy[i] > ArrayCopy[i + 1]) {
+//			max = ArrayCopy[i + 1];
+//			adder = ArrayCopy[i + 1];
+//		} else {
+//			max = ArrayCopy[i];
+//			adder = ArrayCopy[i];
+//		}
+//
+//		while (max <= ArrayCopy[i] * ArrayCopy[i + 1]) {
+//			if (max % ArrayCopy[i] == 0 && max % ArrayCopy[i + 1] == 0) {
+//				ArrayCopy[i] = max;
+//				break;
+//			}
+//			max += adder;
+//		}
+//	}
+//	return ArrayCopy;
+//}
+//
+///// Função Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original
+//int (*twoarrayscalcmatrix(int *Array, int ArraySize, int matriz[20][20]))[20] {
+//	int n;
+//	int *ArrayCopy = AllocateFillArrayCopy(Array, ArraySize);
+//
+//	for (int i = 0; i < 20; i++) {
+//		second_array[i] = (rand() % 29) + 8;
+//	}
+//
+//	for (int i = 0; i < 20; i++) {
+//		for (int j = 0; j < 20; j++) {
+//			matriz[i][j] = second_array[i] * ArrayCopy[j];
+//		}
+//	}
+//	return matriz;
+//}
+//
+///// Função Matriz Transposta
+//int (*transposematrix(int matriz[][20]))[20] {
+//	int tmp;
+//
+//	for (int i = 0; i < 20; i++) {
+//		for (int j = 0; j < 20; j++) {
+//			tmp = matriz[i][j];
+//			matriz[i][j] = matriz[j][i];
+//			matriz[j][i] = tmp;
+//		}
+//	}
+//	return matriz;
+//}

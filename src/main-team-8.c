@@ -12,9 +12,13 @@
 #define Minimum 8
 #define Maximum 29
 
-extern int **Matrix;
+int *OriginalArray;     ///< Define Original Integer Array
+int *IntegerArray;      ///< Define Integer Array
+int **Matrix;           ///< Define Matrix
+int **TransposedMatrix; ///< Define Transposed Matrix
+float *FloatArray;      ///< Define Float Array
 
-/// Função Mostrar Menu e Escolher Sub-Menu
+/// @brief Show Menu and Choose Sub-Menu
 void Menu(int *OriginalArray) {
 	int MenuChoice, ValidMenuChoice;
 	srand(time(NULL));
@@ -38,54 +42,58 @@ void Menu(int *OriginalArray) {
 	if (ValidMenuChoice == 1) {
 		switch (MenuChoice) {
 		case 1:
-			PrintIntegerArray(SortAscendingOrder(OriginalArray, ArraySize), "Vetor ordenado por ordem crescente:", ArraySize);
-			DisposeIntegerArray();
+			PrintIntegerArray(SortAscendingOrder(OriginalArray, IntegerArray, ArraySize), "Vetor ordenado por ordem crescente:", ArraySize);
+			DisposeIntegerArray(IntegerArray);
 			Menu(OriginalArray);
 		case 2:
-			PrintIntegerArray(AddFirstSecondHalf(OriginalArray, ArraySize), "Soma da primeira metade dos elementos no vetor com os da segunda metade:", ArraySize / 2);
-			DisposeIntegerArray();
+			PrintIntegerArray(AddFirstSecondHalf(OriginalArray, IntegerArray, ArraySize), "Soma da primeira metade dos elementos no vetor com os da segunda metade:", ArraySize / 2);
+			DisposeIntegerArray(IntegerArray);
 			Menu(OriginalArray);
 		case 3:
-			PrintIntegerMatrix(GeneratePermutedMatrix(OriginalArray, ArraySize), "Matriz 20x20 com o vetor original e algumas das suas permutações:", ArraySize);
-			DisposeMatrix(ArraySize);
+			Matrix = GeneratePermutedMatrix(OriginalArray, Matrix, ArraySize);
+			PrintIntegerMatrix(Matrix, "Matriz 20x20 com o vetor original e algumas das suas permutações:", ArraySize);
+			Matrix = DisposeMatrix(Matrix, ArraySize);
 			Menu(OriginalArray);
 		case 4:
-			PrintFloatArray(CosineSecondHalf(OriginalArray, ArraySize), "Cosseno da segunda metade dos elementos no vetor:", ArraySize / 2);
-			DisposeFloatArray();
+			PrintFloatArray(CosineSecondHalf(OriginalArray, FloatArray, ArraySize), "Cosseno da segunda metade dos elementos no vetor:", ArraySize / 2);
+			DisposeFloatArray(FloatArray);
 			Menu(OriginalArray);
 		case 5:
 			PrintInteger(RandomElement(OriginalArray, ArraySize), "Elemento aleatório do vetor:");
 			Menu(OriginalArray);
 		case 6:
-			PrintIntegerArray(PositionsMultipleof3(OriginalArray, ArraySize), "Posições múltiplas de 3:", ArraySize / 3);
-			DisposeIntegerArray();
+			PrintIntegerArray(PositionsMultipleof3(OriginalArray, IntegerArray, ArraySize), "Posições múltiplas de 3:", ArraySize / 3);
+			DisposeIntegerArray(IntegerArray);
 			Menu(OriginalArray);
 		case 7:
-			Help();
+			Help(ArraySize, Minimum, Maximum);
 			Menu(OriginalArray);
 		case 8:
 			exit(0);
 		case 9:
-			PrintIntegerArray(MixHalfEachArray(OriginalArray, ArraySize, Minimum, Maximum), "Misturar metade de cada vetor:", ArraySize);
-			DisposeIntegerArray();
+			PrintIntegerArray(MixHalfEachArray(OriginalArray, IntegerArray, ArraySize, Minimum, Maximum), "Misturar metade de cada vetor:", ArraySize);
+			DisposeIntegerArray(IntegerArray);
 			Menu(OriginalArray);
 		case 10:
-			PrintIntegerArray(LeastCommonMultiple(OriginalArray, ArraySize), "Mínimo múltiplo comum de cada dois números seguidos do vetor:", ArraySize - 1);
-			DisposeIntegerArray();
+			PrintIntegerArray(LeastCommonMultiple(OriginalArray, IntegerArray, ArraySize), "Mínimo múltiplo comum de cada dois números seguidos do vetor:", ArraySize - 1);
+			DisposeIntegerArray(IntegerArray);
 			Menu(OriginalArray);
 		case 11:
-			PrintIntegerMatrix(ProductBetweenTwoArrays(OriginalArray, ArraySize, Minimum, Maximum), "Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original:", ArraySize);
-			DisposeIntegerArray();
+			Matrix = ProductBetweenTwoArrays(OriginalArray, IntegerArray, Matrix, ArraySize, Minimum, Maximum);
+			PrintIntegerMatrix(Matrix, "Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original:", ArraySize);
 			Menu(OriginalArray);
 		case 12:
 			if (Matrix == NULL) {
-				printf("Antes de utilizar esta Opção é necessário utilizar a Opção 11 do Menu\n\n");
+				printf("Antes de utilizar esta Opção é necessário utilizar a Opção 11\n\n");
+				Menu(OriginalArray);
 			} else {
-				PrintIntegerMatrix(TransposeMatrix(Matrix, ArraySize), "Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original Transposta:", ArraySize);
+				TransposedMatrix = TransposeMatrix(Matrix, TransposedMatrix, ArraySize);
+				PrintIntegerMatrix(TransposedMatrix, "Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original Transposta:", ArraySize);
+				DisposeMatrix(TransposedMatrix, ArraySize);
 				Menu(OriginalArray);
 			}
-
 		default:
+			printf("Opção Inexistente\n\n");
 			Menu(OriginalArray);
 		}
 	} else {
@@ -98,14 +106,14 @@ void Menu(int *OriginalArray) {
 int main(int argc, char *argv[]) {
 	for (int i = 0; i < argc; i++) {
 		if (strcmp(argv[i], "--help") == 0) {
-			Help();
+			Help(ArraySize, Minimum, Maximum);
 			printf("Pressione Qualquer Tecla para fechar a Ajuda");
 			getchar();
 			ClearTerminal();
 			exit(0);
 		}
 	}
-	int *OriginalArray = (int *)malloc(ArraySize * sizeof(int));
+	OriginalArray = (int *)malloc(ArraySize * sizeof(int));
 	RequestArray(OriginalArray, ArraySize, Minimum, Maximum);
 	Menu(OriginalArray);
 }

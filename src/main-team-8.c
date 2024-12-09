@@ -30,13 +30,13 @@ void Menu(int *OriginalArray) {
 	printf("3  - Matriz 20x20 com o vetor original e algumas das suas permutações\n");
 	printf("4  - Cosseno da segunda metade dos elementos no vetor\n");
 	printf("5  - Elemento aleatório do vetor\n");
-	printf("6  - Posições Múltiplas de 3\n");
-	printf("7  - Menu de Ajuda\n");
+	printf("6  - Elementos em posições múltiplas de 3\n");
+	printf("7  - Menu de ajuda\n");
 	printf("8  - Sair\n");
-	printf("9  - Misturar Metade de Cada Vetor\n");
+	printf("9  - Misturar metade de cada vetor\n");
 	printf("10 - Mínimo múltiplo comum de cada dois números seguidos do vetor\n");
 	printf("11 - Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original\n");
-	printf("12 - Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original Transposta\n");
+	printf("12 - Matriz 20x20 transposta do produto de um vetor aleatório 1x20 e o vetor original\n");
 
 	ValidMenuChoice = scanf("%d", &MenuChoice);
 	ClearTerminal();
@@ -89,7 +89,7 @@ void Menu(int *OriginalArray) {
 				Menu(OriginalArray);
 			} else {
 				TransposedMatrix = TransposeMatrix(Matrix, TransposedMatrix, ArraySize);
-				PrintIntegerMatrix(TransposedMatrix, "Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original Transposta:", ArraySize);
+				PrintIntegerMatrix(TransposedMatrix, "Matriz 20x20 transposta do produto de um vetor aleatório 1x20 e o vetor original:", ArraySize);
 				DisposeMatrix(TransposedMatrix, ArraySize);
 				Menu(OriginalArray);
 			}

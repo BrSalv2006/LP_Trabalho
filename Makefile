@@ -13,6 +13,7 @@ ARGS = -lm
 .PHONY: all clean run help
 
 all: $(EXE)
+	doxygen
 
 $(EXE): $(OBJ) | $(BIN_DIR)
 	$(CC) $^ $(ARGS) -o $@
@@ -25,6 +26,7 @@ $(BIN_DIR) $(OBJ_DIR):
 
 clean:
 	rm -rf $(BIN_DIR) $(OBJ_DIR)
+	rm -rf docs
 
 run: $(EXE)
 	$(EXE)

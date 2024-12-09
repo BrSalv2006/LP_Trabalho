@@ -9,13 +9,11 @@ OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 EXE = $(BIN_DIR)/$(BIN_FILENAME)
 
 CC = cc
-DOXYGEN = doxygen
 ARGS = -lm
 
 .PHONY: all clean run help
 
 all: $(EXE)
-	$(DOXYGEN)
 
 $(EXE): $(OBJ) | $(BIN_DIR)
 	$(CC) $^ $(ARGS) -o $@

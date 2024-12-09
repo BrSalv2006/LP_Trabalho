@@ -1,13 +1,11 @@
-\mainpage README.md
 # LP_Trabalho #
-
- **Table of contents**
-  - [Features](#features)
-  - [Requirements](#requirements)
-  - [Download](#download)
-  - [Compatibility](#compatibility)
-  - [How to Build](#how-to-build)
-  - [License](#license)
+**Table of contents**
+- [Features](#features)
+- [Requirements](#requirements)
+- [Download](#download)
+- [Compatibility](#compatibility)
+- [How to Build](#how-to-build)
+- [License](#license)
 
 ## Features ##
 All of these features are currently implemented with a 20 element vector with elements between 8 and 29.
@@ -31,26 +29,27 @@ All of these features are currently implemented with a 20 element vector with el
 At this time there are no plans to support Windows or another operating system.
 
 ## Download ##
-`LP_Trabalho` is available for [download in compiled form](https://github.com/BrSalv2006/LP_Trabalho/releases) ready to use in Linux or in [source code form](https://github.com/BrSalv2006/LP_Trabalho), which you can [build yourself](docs/developers.md).
+`LP_Trabalho` is available for [download in compiled form](https://github.com/BrSalv2006/LP_Trabalho/releases) ready to use in Linux or in [source code form](https://github.com/BrSalv2006/LP_Trabalho), which you can [build yourself](#how-to-build).
 
 ## How to Build ##
-- **Requirements**
+**Requirements**
   - [GCC](https://gcc.gnu.org/)
   - [MAKE](https://www.gnu.org/software/make/) (OPTIONAL)
-- **Build«**
-  1. Clone the repository
-      ```sh
-      https://github.com/BrSalv2006/LP_Trabalho.git && cd LP_Trabalho
+
+**Build**
+1. Clone the repository:
+  ```bash
+  git clone https://github.com/BrSalv2006/LP_Trabalho.git && cd LP_Trabalho
+  ```
+2. Build binaries:
+  -  Option 1 (Make):
+      ```bash
+      make
       ```
-  2. Build binaries
-      - **Option 1 (Make)**
-          ```sh
-          make
-          ```
-      - **Option 2 (Manually)**
-          ```sh
-          cc ./src/*.c -lm -o ./main.exe
-          ```
+  -  Option 2 (Manually):
+      ```bash
+      cc ./src/*.c -lm -o ./main.exe
+      ```
 
 ## License ##
 Licensed under the [EUPL](https://eupl.eu/1.2/en/).

@@ -38,9 +38,9 @@ At this time there are no plans to support Windows or another operating system.
 
 **Build**
 1. Clone the repository:
-  ```bash
-  git clone https://github.com/BrSalv2006/LP_Trabalho.git && cd LP_Trabalho
-  ```
+    ```bash
+    git clone https://github.com/BrSalv2006/LP_Trabalho.git && cd LP_Trabalho
+    ```
 2. Build binaries:
   -  Option 1 (Make):
       ```bash

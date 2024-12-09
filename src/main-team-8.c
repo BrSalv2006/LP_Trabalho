@@ -8,17 +8,18 @@
 #include <string.h>
 #include <time.h>
 
-#define ArraySize 20
-#define Minimum 8
-#define Maximum 29
+#define ArraySize 20 ///< Size of the Array
+#define Minimum 8    ///< Minimum Valid Number for the Array
+#define Maximum 29   ///< Maximum Valid Number for the Array
 
-int *OriginalArray;     ///< Define Original Integer Array
-int *IntegerArray;      ///< Define Integer Array
-int **Matrix;           ///< Define Matrix
-int **TransposedMatrix; ///< Define Transposed Matrix
-float *FloatArray;      ///< Define Float Array
+int *OriginalArray;     ///< Define Original Array of Integers
+int *IntegerArray;      ///< Define Array of Integers
+int **Matrix;           ///< Define Two Dimensional Array
+int **TransposedMatrix; ///< Define Two Dimensional Array for the Transposed Matrix
+float *FloatArray;      ///< Define Array of Floats
 
 /// @brief Show Menu and Choose Sub-Menu
+/// @param OriginalArray Array with Entered Numbers
 void Menu(int *OriginalArray) {
 	int MenuChoice, ValidMenuChoice;
 	srand(time(NULL));
@@ -102,15 +103,18 @@ void Menu(int *OriginalArray) {
 	}
 }
 
-/// Check Arguments, Request Array and Open Menu
-int main(int argc, char *argv[]) {
-	for (int i = 0; i < argc; i++) {
-		if (strcmp(argv[i], "--help") == 0) {
+/// @brief Check Arguments, Request Array and Open Menu
+/// @param NArgs Number of Entered Arguments
+/// @param AArgs Array of the Entered Arguments
+/// @return Exit Status fo the Program
+int main(int NArgs, char **AArgs) {
+	for (int i = 0; i < NArgs; i++) {
+		if (strcmp(AArgs[i], "--help") == 0) {
 			Help(ArraySize, Minimum, Maximum);
-			printf("Pressione Qualquer Tecla para fechar a Ajuda");
+			printf("Pressione Enter para fechar a Ajuda\n");
 			getchar();
 			ClearTerminal();
-			exit(0);
+			return 0;
 		}
 	}
 	OriginalArray = (int *)malloc(ArraySize * sizeof(int));

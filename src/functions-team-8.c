@@ -19,7 +19,10 @@ void ClearInput() {
 	printf("Input Inválido\n\n");
 }
 
-/// @brief Help
+/// @brief Show Help
+/// @param ArraySize Size of the Array
+/// @param Minimum Minimum Number Accepted on the Array
+/// @param Maximum Maximum Number Accepted on the Array
 void Help(int ArraySize, int Minimum, int Maximum) {
 	ClearTerminal();
 	printf("O objetivo deste trabalho  é  implementar  um programa que peça ao utilizador %d números inteiros e os guarde num vetor, para posteriormente providenciar forma de calcular algumas estatísticas ou fazer operações sobre esses valores.\n", ArraySize);
@@ -44,10 +47,10 @@ void Help(int ArraySize, int Minimum, int Maximum) {
 
 /// @brief Request, Verify and Store Integers between two numbers in an Array
 /// @param Array Empty Array
-/// @param ArraySize Array Size
+/// @param ArraySize Size of the Array
 /// @param Minimum Minimum Number Accepted on the Array
 /// @param Maximum Maximum Number Accepted on the Array
-/// @return Filled Array with ArraySize Numbers between Minimum and Maximum
+/// @return Array with Size of ArraySize, filled with Numbers between Minimum and Maximum
 int *RequestArray(int *Array, int ArraySize, int Minimum, int Maximum) {
 	int Number, ValidNumber;
 	ClearTerminal();
@@ -70,10 +73,11 @@ int *RequestArray(int *Array, int ArraySize, int Minimum, int Maximum) {
 	return Array;
 }
 
-/// @brief Copy Integer Array
+/// @brief Copy an Array of Integers to another Array
 /// @param Array Array from which the numbers will be copied
-/// @param IntegerArray Array which will get the numbers from the other Array
-/// @param ArraySize Array Size
+/// @param IntegerArray Array to which the numbers will be copied
+/// @param ArraySize Size of the Array
+/// @return Memory Location of the Array to which the Numbers where copied
 int *CopyArray(int *Array, int *IntegerArray, int ArraySize) {
 	for (int i = 0; i < ArraySize; i++) {
 		IntegerArray[i] = Array[i];
@@ -81,28 +85,28 @@ int *CopyArray(int *Array, int *IntegerArray, int ArraySize) {
 	return IntegerArray;
 }
 
-/// @brief Allocate Integer Array
-/// @param IntegerArray Integer Array
-/// @param ArraySize Array Size
-/// @return Empty Integer Array
+/// @brief Allocate Memory for an Array of Integers with the size of ArraySize
+/// @param IntegerArray Array to Allocate Memory
+/// @param ArraySize Size of the Array
+/// @return Memory Location of the Allocated Array
 int *AllocateIntegerArray(int *IntegerArray, int ArraySize) {
 	IntegerArray = (int *)calloc(ArraySize, sizeof(int));
 	return IntegerArray;
 }
 
-/// @brief Allocate Float Array
-/// @param FloatArray Float Array
-/// @param ArraySize Array Size
-/// @return Empty Float Array
+/// @brief Allocate Memory for an Array of Floats with the size of ArraySize
+/// @param FloatArray Array to Allocate Memory
+/// @param ArraySize Size of the Array
+/// @return Memory Location of the Allocated Array
 float *AllocateFloatArray(float *FloatArray, int ArraySize) {
 	FloatArray = (float *)calloc(ArraySize, sizeof(float));
 	return FloatArray;
 }
 
-/// @brief Allocate Matrix
-/// @param Matrix Matrix To Allocate Memory
-/// @param ArraySize Array Size
-/// @return Empty Matrix
+/// @brief Allocate Memory for an two Dimension Array of Integers with the size of ArraySize
+/// @param Matrix Two Dimensional Array To Allocate Memory
+/// @param ArraySize Size of the Array
+/// @return Memory Location of the Allocated Array
 int **AllocateMatrix(int **Matrix, int ArraySize) {
 	Matrix = (int **)calloc(ArraySize, sizeof(int *));
 	for (int i = 0; i < ArraySize; i++) {
@@ -111,33 +115,42 @@ int **AllocateMatrix(int **Matrix, int ArraySize) {
 	return Matrix;
 }
 
-/// Dispose Integer Array
+/// @brief Dispose Integer Array
+/// @param IntegerArray Integer Array to Free Memory Allocation
 void DisposeIntegerArray(int *IntegerArray) {
 	free(IntegerArray);
 }
 
-/// Dispose Float Array
+/// @brief Dispose Float Array
+/// @param FloatArray Float Array to Free Memory Allocation
 void DisposeFloatArray(float *FloatArray) {
 	free(FloatArray);
 }
 
-/// Dispose Matrix
+/// @brief Dispose Two Dimensional Array
+/// @param Matrix Two Dimensional Array to Free Memory Allocation
+/// @param ArraySize Size of the Array
+/// @return Two Dimensional Array with no Memory Allocated
 int **DisposeMatrix(int **Matrix, int ArraySize) {
 	for (int i = 0; i < ArraySize; i++) {
 		free(Matrix[i]);
 	}
 	free(Matrix);
 	Matrix = NULL;
-
 	return Matrix;
 }
 
-/// Print Integer
+/// @brief Print Integer
+/// @param Integer Integer to Print
+/// @param Text Message to Display
 void PrintInteger(int Integer, char *Text) {
 	printf("%s\n %d\n\n", Text, Integer);
 }
 
-/// Print Array of Integers
+/// @brief Print Array of Integers
+/// @param Array Array to Print
+/// @param Text Message to Display
+/// @param ArraySize Size of the Array
 void PrintIntegerArray(int *Array, char *Text, int ArraySize) {
 	printf("%s\n", Text);
 	for (int i = 0; i < ArraySize; i++) {
@@ -146,7 +159,10 @@ void PrintIntegerArray(int *Array, char *Text, int ArraySize) {
 	printf("\n\n");
 }
 
-/// Print Array of Floats
+/// @brief Print Array of Floats
+/// @param Array Array to Print
+/// @param Text Message to Display
+/// @param ArraySize Size of the Array
 void PrintFloatArray(float *Array, char *Text, int ArraySize) {
 	printf("%s\n", Text);
 	for (int i = 0; i < ArraySize; i++) {
@@ -155,7 +171,10 @@ void PrintFloatArray(float *Array, char *Text, int ArraySize) {
 	printf("\n\n");
 }
 
-/// Print Matrix of Integers
+/// @brief Print Matrix of Integers
+/// @param Matrix Two Dimensional Array to Print
+/// @param Text Message to Display
+/// @param ArraySize Size of the Array
 void PrintIntegerMatrix(int **Matrix, char *Text, int ArraySize) {
 	printf("%s\n", Text);
 	for (int i = 0; i < ArraySize; i++) {
@@ -167,7 +186,11 @@ void PrintIntegerMatrix(int **Matrix, char *Text, int ArraySize) {
 	printf("\n");
 }
 
-/// Sort Array in Ascending Order
+/// @brief Sort Array in Ascending Order
+/// @param Array Array with the Entered Numbers
+/// @param IntegerArray Array to which the Final Result will be Saved
+/// @param ArraySize Size of the Array
+/// @return Array with the Original Array Sorted in Ascending Order
 int *SortAscendingOrder(int *Array, int *IntegerArray, int ArraySize) {
 	IntegerArray = CopyArray(Array, AllocateIntegerArray(IntegerArray, ArraySize), ArraySize);
 	int k;
@@ -185,7 +208,11 @@ int *SortAscendingOrder(int *Array, int *IntegerArray, int ArraySize) {
 	return IntegerArray;
 }
 
-/// Add First and Second Half of the Array
+/// @brief Add First and Second Half of the Array
+/// @param Array Array with the Entered Numbers
+/// @param IntegerArray Array to which the Final Result will be Saved
+/// @param ArraySize Size of the Array
+/// @return Array with the First Half of and Array Added to it's Second Half
 int *AddFirstSecondHalf(int *Array, int *IntegerArray, int ArraySize) {
 	IntegerArray = AllocateIntegerArray(IntegerArray, ArraySize / 2);
 	for (int i = 0; i < ArraySize / 2; i++) {
@@ -194,7 +221,10 @@ int *AddFirstSecondHalf(int *Array, int *IntegerArray, int ArraySize) {
 	return IntegerArray;
 }
 
-/// Shuffle Array
+/// @brief Shuffle Array
+/// @param Array Array with the Numbers to Shuffle
+/// @param ArraySize Size of the Array
+/// @return Shuffled Array
 int *ShuffleArray(int *Array, int ArraySize) {
 	for (int i = ArraySize - 1; i > 0; i--) {
 		int j = rand() % ArraySize;
@@ -205,7 +235,11 @@ int *ShuffleArray(int *Array, int ArraySize) {
 	return Array;
 }
 
-/// Generate Permuted Matrix
+/// @brief Generate Permuted Matrix
+/// @param Array Array with the Entered Numbers
+/// @param Matrix Two Dimensional Array to which the Final Result will be Saved
+/// @param ArraySize Size of the Array
+/// @return Two Dimensional Array with each of it's rows being a combination of the first
 int **GeneratePermutedMatrix(int *Array, int **Matrix, int ArraySize) {
 	Matrix = AllocateMatrix(Matrix, ArraySize);
 	for (int j = 0; j < ArraySize; j++) {
@@ -218,7 +252,11 @@ int **GeneratePermutedMatrix(int *Array, int **Matrix, int ArraySize) {
 	return Matrix;
 }
 
-/// Cosine of the Second Half of the Array
+/// @brief Cosine of the Second Half of the Array
+/// @param Array Array with the Entered Numbers
+/// @param FloatArray Float Array to which the Final Result will be Saved
+/// @param ArraySize Size of the Array
+/// @return Array with the Cosine of the Second Half of the Original Array
 float *CosineSecondHalf(int *Array, float *FloatArray, int ArraySize) {
 	FloatArray = AllocateFloatArray(FloatArray, ArraySize / 2);
 	for (int i = ArraySize / 2; i < ArraySize; i++) {
@@ -227,13 +265,20 @@ float *CosineSecondHalf(int *Array, float *FloatArray, int ArraySize) {
 	return FloatArray;
 }
 
-/// Random Element of the Array
+/// @brief Select a Random Element of the Array
+/// @param Array Array with the Entered Numbers
+/// @param ArraySize Size of the Array
+/// @return Randomly Selected Number of the Array
 int RandomElement(int *Array, int ArraySize) {
 	int i = rand() % ArraySize;
 	return Array[i];
 }
 
-/// Positions Multiple of 3 of the Array
+/// @brief Positions Multiple of 3 of the Array
+/// @param Array Array with the Entered Numbers
+/// @param IntegerArray Array to which the Final Result will be Saved
+/// @param ArraySize Size of the Array
+/// @return Array with the Numbers on Positions Multiple of 3
 int *PositionsMultipleof3(int *Array, int *IntegerArray, int ArraySize) {
 	IntegerArray = AllocateIntegerArray(IntegerArray, ArraySize / 3);
 	for (int i = 0; i * 3 + 2 < ArraySize; i++) {
@@ -242,7 +287,13 @@ int *PositionsMultipleof3(int *Array, int *IntegerArray, int ArraySize) {
 	return IntegerArray;
 }
 
-/// Mix Half of Each Array
+/// @brief Mix Half of Each Array
+/// @param Array Array with the Entered Numbers
+/// @param IntegerArray Array to which the Final Result will be Saved
+/// @param ArraySize Size of the Array
+/// @param Minimum Minimum Number Accepted on the Array
+/// @param Maximum Maximum Number Accepted on the Array
+/// @return Array with the First Half of the Orinal Entered Array and the Second Half of the Newly Entered Array
 int *MixHalfEachArray(int *Array, int *IntegerArray, int ArraySize, int Minimum, int Maximum) {
 	IntegerArray = AllocateIntegerArray(IntegerArray, ArraySize);
 	RequestArray(IntegerArray, ArraySize, Minimum, Maximum);
@@ -252,7 +303,11 @@ int *MixHalfEachArray(int *Array, int *IntegerArray, int ArraySize, int Minimum,
 	return IntegerArray;
 }
 
-/// Least Common Multiple;
+/// @brief Least Common Multiple
+/// @param Array Array with the Entered Numbers
+/// @param IntegerArray Array to which the Final Result will be Saved
+/// @param ArraySize Size of the Array
+/// @return Array with Least Common Multiples of two Followed Numbers of the Array
 int *LeastCommonMultiple(int *Array, int *IntegerArray, int ArraySize) {
 	IntegerArray = AllocateIntegerArray(IntegerArray, ArraySize - 1);
 	int Temp;
@@ -269,7 +324,14 @@ int *LeastCommonMultiple(int *Array, int *IntegerArray, int ArraySize) {
 	return IntegerArray;
 }
 
-/// Product Between Original Array and Random Array
+/// @brief Product Between Original Array and Random Array
+/// @param Array Array with the Entered Numbers
+/// @param IntegerArray Array to which the Random Generated Array will be Saved
+/// @param Matrix Two Dimensional Array to which the Final Result will be Saved
+/// @param ArraySize Size of the Array
+/// @param Minimum Minimum Number Accepted on the Array
+/// @param Maximum Maximum Number Accepted on the Array
+/// @return Two Dimensional Array with the Product Between Two Arrays
 int **ProductBetweenTwoArrays(int *Array, int *IntegerArray, int **Matrix, int ArraySize, int Minimum, int Maximum) {
 	IntegerArray = AllocateIntegerArray(IntegerArray, ArraySize);
 	Matrix = AllocateMatrix(Matrix, ArraySize);
@@ -285,7 +347,11 @@ int **ProductBetweenTwoArrays(int *Array, int *IntegerArray, int **Matrix, int A
 	return Matrix;
 }
 
-/// Transpose Matrix of Product Between Original Array and Random Array
+/// @brief Transpose Matrix of Product Between Original Array and Random Array
+/// @param Matrix Two Dimensional Array with the Product Between Two Arrays
+/// @param TransposedMatrix Two Dimensional Array to which the Final Result will be Saved
+/// @param ArraySize Size of the Array
+/// @return Transposed Two Dimensional Array of the Original Two Dimensional Array
 int **TransposeMatrix(int **Matrix, int **TransposedMatrix, int ArraySize) {
 	TransposedMatrix = AllocateMatrix(TransposedMatrix, ArraySize);
 	for (int i = 0; i < ArraySize; i++) {

@@ -1,0 +1,4 @@
+\mainpage My Library Manual
+- Building
+- Basics
+- Examples

@@ -55,7 +55,7 @@ int *RequestArray(int *Array, int ArraySize, int Minimum, int Maximum) {
 	int Number, ValidNumber;
 	ClearTerminal();
 	for (int i = 0; i < ArraySize;) {
-		printf("Insira um número inteiro entre %d e %d: ", Minimum, Maximum);
+		printf("Insira um número inteiro entre %d e %d (%dº Número): ", Minimum, Maximum, i + 1);
 		ValidNumber = scanf("%d", &Number);
 		ClearTerminal();
 		if (ValidNumber == 1) {

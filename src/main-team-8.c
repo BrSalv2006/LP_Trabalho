@@ -90,7 +90,7 @@ void Menu(int *OriginalArray) {
 				DisposeMatrix(TransposedMatrix, ArraySize);                                                                                           // Libertar Memória do Array de duas dimensões
 				Menu(OriginalArray);                                                                                                                  // Abrir Menu
 			}
-		case 0:
+		case 12:
 			exit(0); // Terminar Programa com Sucesso
 		default: // Se Opção não existir
 			printf("Opção Inexistente\n\n");

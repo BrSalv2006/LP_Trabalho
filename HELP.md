@@ -11,7 +11,7 @@
 9. Cálculo do mínimo múltiplo comum de cada dois números seguidos do vetor;
 10. Geração de um novo vetor 1x20 aleatório, cálculo e devolução da matriz 20x20 resultante do produto do vetor inicial com o novo vetor lido;
 11. Cálculo e apresentação da matriz transposta referida no ponto anterior.
-0. Encerrar Programa;
+12. Encerrar Programa;
 
 # Argumentos de Inicialização
 1. O programa mostra alguma ajuda quando é executado a partir da linha de comandos com a flag --help.

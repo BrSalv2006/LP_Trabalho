@@ -32,10 +32,10 @@ void Menu(int *OriginalArray) {
 	printf("6  - Elementos em posições múltiplas de 3\n");
 	printf("7  - Menu de ajuda\n");
 	printf("8  - Misturar metade de cada vetor\n");
-	printf("9 - Mínimo múltiplo comum de cada dois números seguidos do vetor\n");
+	printf("9  - Mínimo múltiplo comum de cada dois números seguidos do vetor\n");
 	printf("10 - Matriz 20x20 do produto de um vetor aleatório 1x20 e o vetor original\n");
 	printf("11 - Matriz 20x20 transposta do produto de um vetor aleatório 1x20 e o vetor original\n");
-	printf("0  - Sair\n");
+	printf("12 - Sair\n");
 
 	ValidMenuChoice = scanf("%d", &MenuChoice); // Guardar se escolha é válida
 	ClearTerminal();                            // Limpar Terminal

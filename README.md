@@ -1,4 +1,4 @@
-# LP_Trabalho #
+# Trabalho de Grupo de Laboratórios de Programação #
 **Table of contents**
 - [Features](#features)
 - [Requirements](#requirements)

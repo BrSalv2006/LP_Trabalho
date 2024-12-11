@@ -9,4 +9,4 @@ Neste momento não planos para suporte de outros Sistemas Operativos.
 `LP_Trabalho` está disponível no GitHub. Utilize os links abaixo para obter os arquivos necessários:
 - [**Executável**](https://github.com/BrSalv2006/LP_Trabalho/releases): Transfira a versão pré-compilada do projeto.
 - [**Código Fonte**](https://github.com/BrSalv2006/LP_Trabalho): Acesse o repositório contendo o código fonte.
-  - [Como compilar](#COMO-COMPILAR): Instruções para compilar o código fonte manualmente.
+  - [Como compilar](#Como-Compilar): Instruções para compilar o código fonte manualmente.

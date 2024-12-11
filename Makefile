@@ -11,7 +11,7 @@ EXE = $(BIN_DIR)/$(BIN_FILENAME)
 CC = cc
 ARGS = -lm
 
-.PHONY: all clean run help
+.PHONY: all clean run help doxygen
 
 all: $(EXE)
 
@@ -32,3 +32,6 @@ run: $(EXE)
 
 help: $(EXE)
 	$(EXE) --help
+
+doxygen:
+	doxygen

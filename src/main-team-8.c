@@ -18,7 +18,7 @@ int **Matrix;           ///< Declarar Array de duas dimensões
 int **TransposedMatrix; ///< Declarar Array de duas dimensões para a Matriz Transposta
 float *FloatArray;      ///< Declarar Array de Reais
 
-/// @brief Mostrar Menu
+/// @brief Mostrar Menu de Opções, Selecionar Opção e Verificar se Opção é Válida
 /// @param OriginalArray Array com os números introduzidos
 void Menu(int *OriginalArray) {
 	int MenuChoice, ValidMenuChoice;
@@ -92,7 +92,7 @@ void Menu(int *OriginalArray) {
 			}
 		case 12:
 			exit(0); // Terminar Programa com Sucesso
-		default: // Se Opção não existir
+		default:     // Se Opção não existir
 			printf("Opção Inexistente\n\n");
 			Menu(OriginalArray); // Abrir Menu
 		}
@@ -102,7 +102,7 @@ void Menu(int *OriginalArray) {
 	}
 }
 
-/// @brief Verificar argumentos, solicitar Array e abrir menu
+/// @brief Verificar se os argumento `--`help foi invocado, solicitar Array de Inteiros e Abrir Menu com as Opções
 /// @param argc Número de Argumentos Introduzidos
 /// @param argv Array dos Argumentos Introduzidos
 /// @return Estado de Saída do Programa

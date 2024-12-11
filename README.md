@@ -1,55 +1,39 @@
 # Trabalho de Grupo de Laboratórios de Programação #
-**Table of contents**
-- [Features](#features)
-- [Requirements](#requirements)
-- [Download](#download)
-- [Compatibility](#compatibility)
-- [How to Build](#how-to-build)
-- [License](#license)
+**Tabela de Conteúdo**
+- [Funcionalidades](#funcionalidades)
+  - [Menu](#menu)
+  - [Argumentos de Inicialização](#argumentos-de-inicialização)
+- [Transferir](#Transferir)
+- [Como Compilar](#Como-Compilar)
+- [Constituição do Grupo](#constituição-do-grupo)
+- [Licença](#licença)
 
-## Features ##
-All of these features are currently implemented with a 20 element vector with elements between 8 and 29.
-- Sort vector in ascending order;
-- Sum of the first half of the elements in the vector with those in the second half;
-- 20x20 matrix with the original vector and some of its permutations;
-- Cosine of the second half of the elements in the vector;
-- Random vector element;
-- Elements in positions multiples of 3;
-- Mix half of each vector;
-- Least common multiple of every two followed numbers by the vector;
-- 20x20 matrix of the product of a 1x20 random vector and the original vector;
-- Transposed 20x20 matrix of the product of a 1x20 random vector and the original vector.
+## Funcionalidades ##
+  ### Menu ###
+    1. Devolução do vetor ordenado por ordem crescente;
+    2. Cálculo da soma da primeira metade dos elementos no vetor com os da segunda metade;
+    3. Construção de uma matriz 20 por 20, em que cada linha é composta pelo vetor lido (1ª linha) e por permutações dos seus valores (restantes linhas);
+    4. Cálculo do cosseno da segunda metade dos elementos no vetor;
+    5. Retorno de um elemento aleatório desse vetor;
+    6. Devolução dos valores em posições múltiplas de 3 do vetor;
+    7. Ajuda;
+    8. Leitura de um novo vetor e devolução de um vetor que mistura metade do primeiro vetor e metade do segundo;
+    9. Cálculo do mínimo múltiplo comum de cada dois números seguidos do vetor;
+    10. Geração de um novo vetor 1x20 aleatório, cálculo e devolução da matriz 20x20 resultante do produto do vetor inicial com o novo vetor lido;
+    11. Cálculo e apresentação da matriz transposta referida no ponto anterior.
+    12. Encerrar Programa;
+    
+  ### Argumentos de Inicialização ###
+    1. O programa mostra alguma ajuda quando é executado a partir da linha de comandos com a flag --help.
 
-## Requirements ##
-- Linux/UNIX based Operating System
+## Constituição do Grupo ##
+53588 - Bruno Cunha Salvador\n
+53781 - Gabriel Vicente Monteiro Teixeira\n
+54227 - Dinis Leal Miranda\n
+53748 - João Miguel Coelho da Silva\n
+53741 - João Pedro Marques Esteves Gonçalves\n
+54539 - Duarte Francisco Cardoso Rufino
 
-## Compatibility ##
-`LP_Trabalho` has only been tested on Ubuntu 24.04.1 LTS on WSL.
 
-At this time there are no plans to support Windows or another operating system.
-
-## Download ##
-`LP_Trabalho` is available for [download in compiled form](https://github.com/BrSalv2006/LP_Trabalho/releases) ready to use in Linux or in [source code form](https://github.com/BrSalv2006/LP_Trabalho), which you can [build yourself](#how-to-build).
-
-## How to Build ##
-**Requirements**
-  - [GCC](https://gcc.gnu.org/)
-  - [MAKE](https://www.gnu.org/software/make/) (OPTIONAL)
-
-**Build**
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/BrSalv2006/LP_Trabalho.git && cd LP_Trabalho
-    ```
-2. Build binaries:
-  -  Option 1 (Make):
-      ```bash
-      make
-      ```
-  -  Option 2 (Manually):
-      ```bash
-      cc ./src/*.c -lm -o ./main.exe
-      ```
-
-## License ##
-Licensed under the [EUPL](https://eupl.eu/1.2/en/).
+## Licença ##
+Licenciado sobre a [EUPL](https://eupl.eu/1.2/en/).

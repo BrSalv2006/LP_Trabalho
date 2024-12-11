@@ -19,7 +19,7 @@ void ClearInput() {
 	printf("Input Inválido\n\n");
 }
 
-/// @brief Mostrar Ajuda
+/// @brief Mostrar Ajuda com Algumas das Funcionalidades do Projeto
 /// @param ArraySize Tamanho do Array
 /// @param Minimum Número Mínimo Aceite no Array
 /// @param Maximum Número Máximo Aceite no Array
@@ -186,7 +186,7 @@ void PrintIntegerMatrix(int **Matrix, char *Text, int ArraySize) {
 	printf("\n");
 }
 
-/// @brief Ordenar Array por ordem Crescente
+/// @brief Ordenar Array de Inteiros por ordem Crescente
 /// @param Array Array com os Números Introduzidos
 /// @param IntegerArray Array para o qual o resultado final é guardado
 /// @param ArraySize Tamanho do Array
@@ -221,7 +221,7 @@ int *AddFirstSecondHalf(int *Array, int *IntegerArray, int ArraySize) {
 	return IntegerArray;
 }
 
-/// @brief Baralhar Array
+/// @brief Baralhar Array de Inteiros
 /// @param Array Array com os números a baralhar
 /// @param ArraySize Tamanho do Array
 /// @return Array com os números baralhados
@@ -235,7 +235,7 @@ int *ShuffleArray(int *Array, int ArraySize) {
 	return Array;
 }
 
-/// @brief Gerar Matriz de Permutações
+/// @brief Gerar Matriz de Permutações do Array
 /// @param Array Array com os Números Introduzidos
 /// @param Matrix Array de duas dimensões para o qual o resultado final é guardado
 /// @param ArraySize Tamanho do Array
@@ -272,7 +272,7 @@ int RandomElement(int *Array, int ArraySize) {
 	return Array[i];
 }
 
-/// @brief Elementos em Posições Múltiplas de 3 do Array
+/// @brief Selecionar elementos em posições múltiplas de 3 do Array
 /// @param Array Array com os Números Introduzidos
 /// @param IntegerArray Array para o qual o resultado final é guardado
 /// @param ArraySize Tamanho do Array
@@ -285,7 +285,7 @@ int *PositionsMultipleof3(int *Array, int *IntegerArray, int ArraySize) {
 	return IntegerArray;
 }
 
-/// @brief Misturar metade de cada Array
+/// @brief Misturar a Primeira Metade do Primeiro Array e a Segunda Metade do Segundo Array
 /// @param Array Array com os Números Introduzidos
 /// @param IntegerArray Array para o qual o resultado final é guardado
 /// @param ArraySize Tamanho do Array
@@ -301,7 +301,7 @@ int *MixHalfEachArray(int *Array, int *IntegerArray, int ArraySize, int Minimum,
 	return IntegerArray;
 }
 
-/// @brief Mínimo Múltiplo Comum entre dois números seguidos de um Array
+/// @brief Calcular Mínimos Múltiplos Comuns entre dois números seguidos de um Array
 /// @param Array Array com os Números Introduzidos
 /// @param IntegerArray Array para o qual o resultado final é guardado
 /// @param ArraySize Tamanho do Array
@@ -322,7 +322,7 @@ int *LeastCommonMultiple(int *Array, int *IntegerArray, int ArraySize) {
 	return IntegerArray;
 }
 
-/// @brief Produto entre o Array Original e um Array gerado aleatoriamente
+/// @brief Calcular Produto entre o Array Original e um Array gerado aleatoriamente
 /// @param Array Array com os Números Introduzidos
 /// @param IntegerArray Array para o qual o Array Gerado Aleatoriamente vai ser guardado
 /// @param Matrix Array de duas dimensões para o qual o resultado final é guardado

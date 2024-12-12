@@ -20,7 +20,7 @@ void DisposeIntegerArray(int *IntegerArray);
 // Libertar Memória de um Array de Reais
 void DisposeFloatArray(float *FloatArray);
 
-// Libertar Memória de um Array de duas dimensões de Inteiros
+// Libertar Memória de um Array Bidimensional de Inteiros
 int **DisposeMatrix(int **Matrix, int ArraySize);
 
 // Solicitar, verificar e armazenar números inteiros entre dois números num Array
@@ -35,7 +35,7 @@ void PrintIntegerArray(int *Array, char *Text, int ArraySize);
 // Mostrar Array de Reais
 void PrintFloatArray(float *Array, char *Text, int ArraySize);
 
-// Mostrar Array de duas dimensões de Inteiros
+// Mostrar Array Bidimensional de Inteiros
 void PrintIntegerMatrix(int **Matrix, char *Text, int ArraySize);
 
 // Ordenar Array por ordem Crescente

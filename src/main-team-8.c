@@ -14,8 +14,8 @@
 
 int *OriginalArray;     ///< Declarar Array dos números introduzidos
 int *IntegerArray;      ///< Declarar Array de Inteiros
-int **Matrix;           ///< Declarar Array de duas dimensões
-int **TransposedMatrix; ///< Declarar Array de duas dimensões para a Matriz Transposta
+int **Matrix;           ///< Declarar Array Bidimensional
+int **TransposedMatrix; ///< Declarar Array Bidimensional para a Matriz Transposta
 float *FloatArray;      ///< Declarar Array de Reais
 
 /// @brief Mostrar Menu de Opções, Selecionar Opção e Verificar se Opção é Válida
@@ -52,7 +52,7 @@ void Menu(int *OriginalArray) {
 		case 3:
 			Matrix = GeneratePermutedMatrix(OriginalArray, Matrix, ArraySize);                                          // Gerar Matriz de permutações
 			PrintIntegerMatrix(Matrix, "Matriz 20x20 com o vetor original e algumas das suas permutações:", ArraySize); // Mostar Matriz de Permutações
-			Matrix = DisposeMatrix(Matrix, ArraySize);                                                                  // Libertar Memória do Array de duas dimensões
+			Matrix = DisposeMatrix(Matrix, ArraySize);                                                                  // Libertar Memória do Array Bidimensional
 			Menu(OriginalArray);                                                                                        // Abrir Menu
 		case 4:
 			PrintFloatArray(CosineSecondHalf(OriginalArray, FloatArray, ArraySize), "Cosseno da segunda metade dos elementos no vetor:", ArraySize / 2); // Calcular e Mostrar cosseno da segunda metade do Array
@@ -87,7 +87,7 @@ void Menu(int *OriginalArray) {
 			} else {
 				TransposedMatrix = TransposeMatrix(Matrix, TransposedMatrix, ArraySize);                                                              // Calcular Transposta do Produto entre o Array Original e um Array gerado aleatoriamente
 				PrintIntegerMatrix(TransposedMatrix, "Matriz 20x20 transposta do produto de um vetor aleatório 1x20 e o vetor original:", ArraySize); // Mostrar Transposta do Produto entre o Array Original e um Array gerado aleatoriamente
-				DisposeMatrix(TransposedMatrix, ArraySize);                                                                                           // Libertar Memória do Array de duas dimensões
+				DisposeMatrix(TransposedMatrix, ArraySize);                                                                                           // Libertar Memória do Array Bidimensional
 				Menu(OriginalArray);                                                                                                                  // Abrir Menu
 			}
 		case 12:

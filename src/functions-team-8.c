@@ -103,8 +103,8 @@ float *AllocateFloatArray(float *FloatArray, int ArraySize) {
 	return FloatArray;
 }
 
-/// @brief Alocar Memória para um Array de duas dimensões de Inteiros com o tamanho de ArraySize
-/// @param Matrix Array de duas dimensões para o qual Alocar Memória
+/// @brief Alocar Memória para um Array Bidimensional de Inteiros com o tamanho de ArraySize
+/// @param Matrix Array Bidimensional para o qual Alocar Memória
 /// @param ArraySize Tamanho do Array
 /// @return Localização do Array na Memória
 int **AllocateMatrix(int **Matrix, int ArraySize) {
@@ -127,15 +127,15 @@ void DisposeFloatArray(float *FloatArray) {
 	free(FloatArray); // Libertar Alocação de Memória de um Array de Reais
 }
 
-/// @brief Libertar Memória de um Array de duas dimensões de Inteiros
-/// @param Matrix Array de duas dimensões de Inteiros para Libertar Alocação de Memória
+/// @brief Libertar Memória de um Array Bidimensional de Inteiros
+/// @param Matrix Array Bidimensional de Inteiros para Libertar Alocação de Memória
 /// @param ArraySize Tamanho do Array
-/// @return Array NULL de duas dimensões
+/// @return Array NULL Bidimensional
 int **DisposeMatrix(int **Matrix, int ArraySize) {
 	for (int i = 0; i < ArraySize; i++) { // Repetir para todas as colunas o Array
-		free(Matrix[i]);                  // Libertar Memória das colunas do Array de duas dimensões
+		free(Matrix[i]);                  // Libertar Memória das colunas do Array Bidimensional
 	}
-	free(Matrix); // Libertar Memória das linhas do Array de duas dimensões
+	free(Matrix); // Libertar Memória das linhas do Array Bidimensional
 	Matrix = NULL;
 	return Matrix;
 }
@@ -171,8 +171,8 @@ void PrintFloatArray(float *Array, char *Text, int ArraySize) {
 	printf("\n\n");
 }
 
-/// @brief Mostrar Array de duas dimensões de Inteiros
-/// @param Matrix Array de duas dimensões a Mostrar
+/// @brief Mostrar Array Bidimensional de Inteiros
+/// @param Matrix Array Bidimensional a Mostrar
 /// @param Text Mensagem a Mostrar
 /// @param ArraySize Tamanho do Array
 void PrintIntegerMatrix(int **Matrix, char *Text, int ArraySize) {
@@ -237,14 +237,14 @@ int *ShuffleArray(int *Array, int ArraySize) {
 
 /// @brief Gerar Matriz de Permutações do Array
 /// @param Array Array com os Números Introduzidos
-/// @param Matrix Array de duas dimensões para o qual o resultado final é guardado
+/// @param Matrix Array Bidimensional para o qual o resultado final é guardado
 /// @param ArraySize Tamanho do Array
-/// @return Array de duas dimensões sendo cada uma das suas linhas uma combinação da primeira
+/// @return Array Bidimensional sendo cada uma das suas linhas uma combinação da primeira
 int **GeneratePermutedMatrix(int *Array, int **Matrix, int ArraySize) {
-	Matrix = AllocateMatrix(Matrix, ArraySize);             // Alocar Memória para o Array de duas dimensões
-	CopyArray(Array, Matrix[0], ArraySize);                 // Copiar Array para a primeira linha do Array de duas dimensões
+	Matrix = AllocateMatrix(Matrix, ArraySize);             // Alocar Memória para o Array Bidimensional
+	CopyArray(Array, Matrix[0], ArraySize);                 // Copiar Array para a primeira linha do Array Bidimensional
 	for (int i = 1; i < ArraySize; i++) {                   // Repetir para o Array todo excluindo a primeira linha
-		Matrix[i] = CopyArray(Array, Matrix[i], ArraySize); // Copiar Array para a linha i do Array de duas dimensões
+		Matrix[i] = CopyArray(Array, Matrix[i], ArraySize); // Copiar Array para a linha i do Array Bidimensional
 		ShuffleArray(Matrix[i], ArraySize);                 // Baralhar Linha i do Array
 	}
 	return Matrix;
@@ -325,20 +325,20 @@ int *LeastCommonMultiple(int *Array, int *IntegerArray, int ArraySize) {
 /// @brief Calcular Produto entre o Array Original e um Array gerado aleatoriamente
 /// @param Array Array com os Números Introduzidos
 /// @param IntegerArray Array para o qual o Array Gerado Aleatoriamente vai ser guardado
-/// @param Matrix Array de duas dimensões para o qual o resultado final é guardado
+/// @param Matrix Array Bidimensional para o qual o resultado final é guardado
 /// @param ArraySize Tamanho do Array
 /// @param Minimum Número Mínimo Aceite no Array
 /// @param Maximum Número Máximo Aceite no Array
-/// @return Array de duas dimensões com o produto entre dois Arrays
+/// @return Array Bidimensional com o produto entre dois Arrays
 int **ProductBetweenTwoArrays(int *Array, int *IntegerArray, int **Matrix, int ArraySize, int Minimum, int Maximum) {
 	IntegerArray = AllocateIntegerArray(IntegerArray, ArraySize);     // Alocar Memória para o Array
-	Matrix = AllocateMatrix(Matrix, ArraySize);                       // Alocar Memória para o Array de duas dimensões
+	Matrix = AllocateMatrix(Matrix, ArraySize);                       // Alocar Memória para o Array Bidimensional
 	for (int i = 0; i < ArraySize; i++) {                             // Repetir para todo o Array
 		IntegerArray[i] = rand() % (Maximum + 1 - Minimum) + Minimum; // Gerar número Aleatório entre dois número e guardar num Array
 	}
-	for (int i = 0; i < ArraySize; i++) {              // Repetir para todas as linhas do Array de duas dimensões
-		for (int j = 0; j < ArraySize; j++) {          // Repetir para todas as colunas do Array de duas dimensões
-			Matrix[i][j] = IntegerArray[i] * Array[j]; // Calcular produto entre os dois Arrays e Guardar no Array de duas dimensões
+	for (int i = 0; i < ArraySize; i++) {              // Repetir para todas as linhas do Array Bidimensional
+		for (int j = 0; j < ArraySize; j++) {          // Repetir para todas as colunas do Array Bidimensional
+			Matrix[i][j] = IntegerArray[i] * Array[j]; // Calcular produto entre os dois Arrays e Guardar no Array Bidimensional
 		}
 	}
 	DisposeIntegerArray(IntegerArray); // Libertar Memória do Array
@@ -346,17 +346,17 @@ int **ProductBetweenTwoArrays(int *Array, int *IntegerArray, int **Matrix, int A
 }
 
 /// @brief Matriz Transposta do Produto entre o Array Original e um Array gerado aleatoriamente
-/// @param Matrix Array de duas dimensões com o produto entre dois Arrays
-/// @param TransposedMatrix Array de duas dimensões para o qual o resultado final é guardado
+/// @param Matrix Array Bidimensional com o produto entre dois Arrays
+/// @param TransposedMatrix Array Bidimensional para o qual o resultado final é guardado
 /// @param ArraySize Tamanho do Array
-/// @return Transposta de um Array de duas dimensões com o produto entre dois Arrays
+/// @return Transposta de um Array Bidimensional com o produto entre dois Arrays
 int **TransposeMatrix(int **Matrix, int **TransposedMatrix, int ArraySize) {
-	TransposedMatrix = AllocateMatrix(TransposedMatrix, ArraySize); // Alocar Memória para o Array de duas dimensões
-	for (int i = 0; i < ArraySize; i++) {                           // Repetir para todas as linhas do Array de duas dimensões
-		for (int j = 0; j < ArraySize; j++) {                       // Repetir para todas as colunas do Array de duas dimensões
-			int Temp = Matrix[i][j];                                // Guardar um elemento do Array de duas dimensões numa variável temporária
-			TransposedMatrix[i][j] = Matrix[j][i];                  // Guardar o número na posição ij na posição ji do Array de duas dimensões
-			TransposedMatrix[j][i] = Temp;                          // Guardar o número na variável temporária na posição ji do Array de duas dimensões
+	TransposedMatrix = AllocateMatrix(TransposedMatrix, ArraySize); // Alocar Memória para o Array Bidimensional
+	for (int i = 0; i < ArraySize; i++) {                           // Repetir para todas as linhas do Array Bidimensional
+		for (int j = 0; j < ArraySize; j++) {                       // Repetir para todas as colunas do Array Bidimensional
+			int Temp = Matrix[i][j];                                // Guardar um elemento do Array Bidimensional numa variável temporária
+			TransposedMatrix[i][j] = Matrix[j][i];                  // Guardar o número na posição ij na posição ji do Array Bidimensional
+			TransposedMatrix[j][i] = Temp;                          // Guardar o número na variável temporária na posição ji do Array Bidimensional
 		}
 	}
 	return TransposedMatrix;

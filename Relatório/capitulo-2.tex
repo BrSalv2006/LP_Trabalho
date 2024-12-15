@@ -1,0 +1,37 @@
+\chapter{Estado da Arte}
+\label{chap:estado-da-arte}
+
+\section{Introdução}
+\label{chap2:sec:intro}
+Neste capítulo são abordadas as ferramentas essenciais para o desenvolvimento do trabalho. Este capítulo encontra-se estruturado da seguinte forma: a secção \ref{chap2:sec:estado} descreve o estado-da-arte em termos de tecnologias importantes para o projeto e a secção \ref{chap2:sec:trab-relacionado} descreve outros trabalhos semelhantes ao que foi desenvolvido neste trabalho.
+
+\section{Estado Da Arte}
+\label{chap2:sec:estado}
+
+\subsection{Validação de Entrada}
+\label{chap2:subsec:validacao-entrada}
+
+O processo de validação de entrada é necessário quando existe a obrigação de assegurar que os dados que o utilizador fornecer sejam viáveis, isto é, que estejam num intervalo de números específico. 
+\par No contexto deste projeto, os valores inseridos pelo utilizador devem estar entre 8 e 29. Caso os números escolhidos não pertençam ao intervalo previamente definido, esses serão rejeitados, até que sejam introduzidos valores aceitáveis.
+
+\newpage
+
+\subsection{Matrizes e Operações Matemáticas}
+\label{chap2:subsec:matrizes-operacoes}
+Este projeto envolve noções de álgebra linear, como a manipulação de matrizes.
+Isto deve-se ao fato de que um dos objetivos a ser concretizado é a geração de uma matriz 20×20, em que as suas linhas são permutações do vetor construído inicialmente. \par
+Outro aspeto a salientar é o envolvimento do cálculo de funções trigonométricas, como o cosseno (cos) dos elementos da segunda metade do vetor. \par
+A implementação desta funcionalidade requer o uso de bibliotecas matemáticas que forneçam as operações trigonométricas necessárias. 
+Além disso, a geração de um vetor aleatório e a realização de operações sobre ele são técnicas comuns em áreas como a estatística e a análise de dados.
+
+\section{Trabalhos Relacionados}
+\label{chap2:sec:trab-relacionado}
+O \textit{MatrixCalc}\cite{matrixcalcCalculadoraMatrizes} é uma ferramenta \textit{online} que permite realizar operações com matrizes e vetores, tais como soma, multiplicação e cálculo de determinantes. Embora ambos os projetos compartilhem o objetivo de simplificar a manipulação de matrizes, o projeto descrito neste relatório oferece funcionalidades mais específicas, como validação de entrada, geração de matrizes com permutações e cálculos personalizados, como o cosseno de elementos do vetor. Além disso, o \textit{MatrixCalc} não conta com aspetos interativos, como menus ou geração de valores aleatórios. \par
+O \textit{Wolfram Alpha}\cite{wolframalphaWolframAlphaMaking} é uma plataforma que realiza cálculos complexos e responde a perguntas em várias áreas, como matemática e tecnologia. Assim como no trabalho, ele trabalha com dados fornecidos pelo utilizador para realizar operações como ordenação e cálculo de cossenos. \par
+Enquanto o \textit{Wolfram Alpha} é uma ferramenta ampla e automatizada, o trabalho foca na interação com o utilizador, manipulando um vetor de 20 números com validação de entrada e um menu para operações específicas. \par
+A biblioteca \textit{NumPy}\cite{numpyNumPy}, do \textit{Python}\cite{pythonWelcomePythonorg}, é amplamente usada para manipulação de matrizes e vetores em projetos de aprendizado de máquina e estatística. Embora compartilhe com o projeto atual a capacidade de realizar cálculos eficientes de álgebra linear, o \textit{NumPy} exige programação e não oferece uma interface interativa. O projeto atual, por outro lado, foca em funcionalidades específicas, como validação de entrada e operações personalizadas com matrizes, o que o torna mais acessível para o utilizador final.
+
+
+\section{Conclusões}
+\label{chap2:sec:concs}
+Neste capítulo, foram analisadas ferramentas como o \textit{MatrixCalc}, o \textit{Wolfram Alpha} e o \textit{NumPy}, que influenciaram o desenvolvimento do projeto. Embora compartilhem algumas funcionalidades, o projeto descrito se destaca por focar numa abordagem mais interativa e personalizada, com validação de entrada, geração de matrizes a partir de permutações e cálculos específicos. Essas características tornam o projeto mais acessível ao utilizador e formam a base para as próximas etapas do desenvolvimento.

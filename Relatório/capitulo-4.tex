@@ -1,0 +1,226 @@
+\chapter{Implementação e Testes}
+\label{chap:imp-test}
+
+\section{Introdução}
+\label{chap4:sec:intro}
+
+\par Durante a fase de implementação e de testes do código, foi utilizado o \textit{\ac{VS Code}} juntamente com o \textit{Make} para a simplificação e aceleração do processo de compilação de código.
+\par
+O projeto foi dividido em três ficheiros: \texttt{main-team-8.c}, \texttt{functions-team-8.c} e \texttt{functions-team-8.h}. Na secção seguinte são apresentados alguns excertos destes mesmos ficheiros.
+
+\newpage
+
+\section{Trechos de Código}
+\label{chap4:sec:code}
+
+\begin{lstlisting}[caption=Mostrar Menu e Verificar Opção escolhida., label=chap4:code:1]
+void Menu(int *OriginalArray) {
+    int MenuChoice, ValidMenuChoice;
+    PrintIntegerArray(OriginalArray, "Vetor Original:", ArraySize);
+    printf("Menu:\n");
+    printf("1  - Vetor ordenado por ordem crescente\n");
+        %*\texttt{\vdots}*)
+    printf("12 - Sair\n");
+
+    // Guardar se escolha é válida
+    ValidMenuChoice = scanf("%d", &MenuChoice); 
+    ClearTerminal();
+    // Verificar se existe uma escolha válida
+    if (ValidMenuChoice == 1) {
+        switch (MenuChoice) {
+        case 1:
+            %*\textnormal{\vdots}*)
+        default:
+            printf("Opção Inexistente\n\n");
+            // Abrir Menu
+            Menu(OriginalArray);
+        }
+    } else {
+        // Limpar Input
+        ClearInput();
+        // Abrir Menu
+        Menu(OriginalArray);
+    }
+}
+\end{lstlisting}
+
+\newpage
+
+\begin{lstlisting}[caption=Verificação dos argumentos e preenchimento do Vetor., label=chap4:code:2]
+int main(int argc, char **argv) {
+    // Iniciar Geração Aleatória com SEED baseada no tempo
+    srand(time(NULL));
+    for (int i = 0; i < argc; i++) {
+        // Verificar se o argumento introduzido é "--help"
+        if (strcmp(argv[i], "--help") == 0) {
+            // Mostrar Ajuda
+            Help(ArraySize, Minimum, Maximum);
+            printf("Pressione Enter para fechar a Ajuda\n");
+            // Esperar por Input do utilizador para fechar a ajuda
+            getchar();
+            ClearTerminal();
+            // Terminar Programa com Sucesso
+            return 0;
+        }
+    }
+    // Alocar Memória para o Array
+    OriginalArray = AllocateIntegerArray(OriginalArray, ArraySize);
+    // Preencher o Array
+    RequestArray(OriginalArray, ArraySize, Minimum, Maximum);
+    // Abrir Menu
+    Menu(OriginalArray);
+}    
+\end{lstlisting}
+
+\newpage
+
+\begin{lstlisting}[caption={Pedir, Verificar e Guardar Números Introduzidos.}, label=chap4:code:3]
+int *RequestArray(int *Array, int ArraySize, int Minimum, int Maximum) {
+    int Number, ValidNumber;
+    ClearTerminal();
+    for (int i = 0; i < ArraySize;) {
+        printf("Insira um número inteiro entre %d e %d (%d%*\textnormal{\textordmasculine{}}*) Número): ", Minimum, Maximum, i + 1);
+        // Guardar número de caráteres númericos válidos introduzidos
+        ValidNumber = scanf("%d", &Number);
+        ClearTerminal();
+        // Verificar se número introduzido é um caráter não númerico
+        if (ValidNumber == 1) {
+            // Verificar se número introduzido está entre um Mínimo e um Máximo
+            if (Number >= Minimum && Number <= Maximum) {
+                // Guardar número no Array
+                Array[i] = Number;
+                i++;
+            } else {
+                printf("O número deve estar compreendido entre %d e %d.\n", Minimum, Maximum);
+            }
+        } else {
+            // Limpar Input em caso do caráter introduzido não ser um número
+            ClearInput();
+        }
+    }
+    ClearTerminal();
+    return Array;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Alocar Memória para um Vetor de Inteiros., label=chap4:code:4]
+int *AllocateIntegerArray(int *IntegerArray, int ArraySize) {
+    IntegerArray = (int *)calloc(ArraySize, sizeof(int)); // Alocar Memória para um Array de Inteiros
+    return IntegerArray;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Mostrar Vetor, label=chap4:code:5]
+void PrintIntegerArray(int *Array, char *Text, int ArraySize) {
+    printf("%s\n", Text);
+    for (int i = 0; i < ArraySize; i++) {
+        printf(" %d", Array[i]);
+    }
+    printf("\n\n");
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Ordenar Vetor por Ordem Crescente, label=chap4:code:6]
+int *SortAscendingOrder(int *Array, int *IntegerArray, int ArraySize) {
+    // Alocar Memória para o Array
+    IntegerArray = CopyArray(Array, AllocateIntegerArray(IntegerArray, ArraySize), ArraySize);
+    int k;
+    do {
+        k = 0;
+        for (int i = 0; i < ArraySize - 1; i++) {
+            // Verificar se o número i é maior que o número i+1
+            if (IntegerArray[i] > IntegerArray[i + 1]) {
+                // Guardar número i na variável temporária
+                int Temp = IntegerArray[i];
+                // Colocar número i+1 na posição do número i
+                IntegerArray[i] = IntegerArray[i + 1];
+                // Colocar número na variável temporária na posição i+1
+                IntegerArray[i + 1] = Temp;
+                k++;
+            }
+        }
+    } while (k != 0); // Repetir enquanto não ordenado
+    return IntegerArray;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Adicionar Primeira metade à Segunda Metade do Vetor., label=chap4:code:7]
+int *AddFirstSecondHalf(int *Array, int *IntegerArray, int ArraySize) {
+    // Alocar Memória para o Array
+    IntegerArray = AllocateIntegerArray(IntegerArray, ArraySize / 2);
+    for (int i = 0; i < ArraySize / 2; i++) {
+        // Somar número i com número i+ArraySize/2
+        IntegerArray[i] = Array[i] + Array[i + ArraySize / 2]; 
+    }
+    return IntegerArray;
+}
+\end{lstlisting}
+
+\newpage
+
+\begin{lstlisting}[caption=Gerar Matriz de Permutações., label=chap4:code:8]
+int *ShuffleArray(int *Array, int ArraySize) {
+    for (int i = ArraySize - 1; i > 0; i--) {
+        // Gerar posição aleatória para a qual o número vai ocupar
+        int j = rand() % ArraySize;
+        // Guardar número na posição gerada aleatóriamente na variável temporária
+        int Temp = Array[j];
+        // Colocar número i na posição do número j
+        Array[j] = Array[i];
+        // Colocar número na variável temporária na posição i
+        Array[i] = Temp;
+    }
+    return Array;
+}
+
+int **GeneratePermutedMatrix(int *Array, int **Matrix, int ArraySize) {
+    Matrix = AllocateMatrix(Matrix, ArraySize);             // Alocar Memória para o Array Bidimensional
+    CopyArray(Array, Matrix[0], ArraySize);                 // Copiar Array para a primeira linha do Array Bidimensional
+    for (int i = 1; i < ArraySize; i++) {                   // Repetir para o Array todo excluindo a primeira linha
+        Matrix[i] = CopyArray(Array, Matrix[i], ArraySize); // Copiar Array para a linha i do Array Bidimensional
+        ShuffleArray(Matrix[i], ArraySize);                 // Baralhar Linha i do Array
+    }
+    return Matrix;
+}
+\end{lstlisting}
+
+Vale realçar que a geração aleatório de números (rand()), usada no Excerto de código \ref{chap4:code:8}, sendo esta baseada no tempo, a mesma gera um número igual se esta for executada no mesmo segundo.
+
+\begin{lstlisting}[caption= Posições Múltiplas de três., label=chap4:code:9]
+int *PositionsMultipleof3(int *Array, int *IntegerArray, int ArraySize) {
+    // Alocar Memória para o Array
+    IntegerArray = AllocateIntegerArray(IntegerArray, ArraySize / 3);
+    for (int i = 0; i * 3 + 2 < ArraySize; i++) {
+        // Guardar os números em posições múltiplas de 3 num Array
+        IntegerArray[i] = Array[i * 3 + 2];
+    }
+    return IntegerArray;
+}
+\end{lstlisting}
+
+Ao escrever a função demonstrada no Excerto de código \ref{chap4:code:9} assumimos que o primeiro elemento do Vetor ocupa a posição um.
+
+\begin{lstlisting}[caption=Produto entre o vetor Introduzido e um vetor aleatório., label=chap4:code:10]
+int **ProductBetweenTwoArrays(int *Array, int *IntegerArray, int **Matrix, int ArraySize, int Minimum, int Maximum) {
+    // Alocar Memória para o Array
+    IntegerArray = AllocateIntegerArray(IntegerArray, ArraySize);
+    // Alocar Memória para o Array Bidimensiona
+    Matrix = AllocateMatrix(Matrix, ArraySize);
+    for (int i = 0; i < ArraySize; i++) {
+        // Gerar número Aleatório entre dois número e guardar num Array
+        IntegerArray[i] = rand() % (Maximum + 1 - Minimum) + Minimum; 
+	}
+    for (int i = 0; i < ArraySize; i++) {
+	   for (int j = 0; j < ArraySize; j++) {
+            // Calcular produto entre os dois Arrays e Guardar no Array Bidimensional
+            Matrix[i][j] = IntegerArray[i] * Array[j];
+        }
+    }
+    DisposeIntegerArray(IntegerArray); // Libertar Memória do Array
+    return Matrix;
+}
+\end{lstlisting}
+
+\section{Conclusões}
+\label{chap4:sec:concs}
+Os exemplos de código apresentados mostram que é importante saber programar em C, mas também escrever de forma clara e organizada. Usar comentários no código ajuda muito, porque facilita a leitura e o entendimento por outras pessoas. Além disso, trocar ideias e trabalhar em equipa é essencial, já que há muitas maneiras diferentes de resolver os mesmos problemas em programação.
